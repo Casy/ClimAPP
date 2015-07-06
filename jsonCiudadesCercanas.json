@@ -1,0 +1,109 @@
+{
+  "message": "accurate",
+  "cod": "200",
+  "count": 3,
+  "list": [
+    {
+      "id": 3430679,
+      "name": "Ministro Rivadavia",
+      "coord": {
+        "lon": -58.366192,
+        "lat": -34.841042
+      },
+      "main": {
+        "temp": 289.18,
+        "pressure": 1016,
+        "humidity": 51,
+        "temp_min": 288.15,
+        "temp_max": 290.37
+      },
+      "dt": 1436215210,
+      "wind": {
+        "speed": 1,
+        "deg": 0
+      },
+      "sys": {
+        "country": ""
+      },
+      "clouds": {
+        "all": 0
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "Sky is Clear",
+          "icon": "01d"
+        }
+      ]
+    },
+    {
+      "id": 3431259,
+      "name": "Longchamps",
+      "coord": {
+        "lon": -58.385471,
+        "lat": -34.856758
+      },
+      "main": {
+        "temp": 288.9,
+        "pressure": 1016,
+        "humidity": 51,
+        "temp_min": 288.15,
+        "temp_max": 290.37
+      },
+      "dt": 1436215210,
+      "wind": {
+        "speed": 1,
+        "deg": 0
+      },
+      "sys": {
+        "country": ""
+      },
+      "clouds": {
+        "all": 0
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "Sky is Clear",
+          "icon": "01d"
+        }
+      ]
+    },
+    {
+      "id": 3433923,
+      "name": "Florencio Varela",
+      "coord": {
+        "lon": -58.395561,
+        "lat": -34.827221
+      },
+      "main": {
+        "temp": 288.01,
+        "pressure": 1016,
+        "humidity": 51,
+        "temp_min": 287.04,
+        "temp_max": 288.71
+      },
+      "dt": 1436215359,
+      "wind": {
+        "speed": 1,
+        "deg": 0
+      },
+      "sys": {
+        "country": ""
+      },
+      "clouds": {
+        "all": 0
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "Sky is Clear",
+          "icon": "01d"
+        }
+      ]
+    }
+  ]
+}
