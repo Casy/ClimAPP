@@ -76,7 +76,7 @@ controller.ver_mas = function(){
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_ver_mas.html', function(){
-					setearVerMas(controller.datos.clima_completo.list);
+					setearVerMas(controller.datos.clima_completo.list);//VER MAS VISTA
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
@@ -123,7 +123,7 @@ controller.controller = function(){
 						$('div.dia-selected').prev().click();
 					});
 
-					controller.ver_mas();
+					controller.ver_mas(); 
 
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;		
