@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	}
 
 });
-},{"./controller":3,"./leaflet-openweathermap":6,"jquery":11,"jquery-ui":10,"leaflet":12}],2:[function(require,module,exports){
+},{"./controller":3,"./leaflet-openweathermap":6,"jquery":12,"jquery-ui":11,"leaflet":13}],2:[function(require,module,exports){
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -154,7 +154,7 @@ controller.ciudades_cercanas = function(){
 	//http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=3
 	$.ajax({ 
 		type: "GET",
-		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&cnt=3&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=3&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0',
 		dataType: "json",
 		success: function (data) {
 			console.log("Ciudades cercanas -> LISTO");
@@ -213,6 +213,7 @@ controller.controller = function(){
 	var organizarDias = require('./organizarDias.js');
 	var generarMapa = require('./generarMapa.js');
 	var primerDia = require('./primerDia.js');
+	var setCercanos = require('./setCercanos.js');
 
 	$("#clima_actual").on("click", function(){
 		if(vista_actual != 'clima_actual' && estado_vistas != true){
@@ -258,6 +259,7 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
 					generarMapa(controller.datos.latitud, controller.datos.longitud);///GENERADOR DEL MAPA
+					setCercanos(controller.datos);
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
@@ -320,7 +322,7 @@ controller.controller = function(){
 }
 
 module.exports = controller;
-},{"./cambiarDia.js":2,"./generarMapa.js":5,"./organizarDias.js":7,"./primerDia.js":8,"./setearVerMas.js":9}],4:[function(require,module,exports){
+},{"./cambiarDia.js":2,"./generarMapa.js":5,"./organizarDias.js":7,"./primerDia.js":8,"./setCercanos.js":9,"./setearVerMas.js":10}],4:[function(require,module,exports){
 
 
 var diaSemana = function diaSemana(day){
@@ -1614,6 +1616,30 @@ module.exports = primerDia;
 },{"./organizarDias.js":7}],9:[function(require,module,exports){
 
 
+var setCercanos = function setCercanos(datos){
+
+	//CIUDAD CENTRO
+	$('#ciudad_ahora').html('AHORA - '+datos.clima_completo.city.name);
+	$('#icono_dia_actual').attr('src','http://openweathermap.org/img/w/'+datos.clima_completo.list[0].weather[0].icon+'.png');
+	$('#grados_dia_actual').html(parseInt(datos.clima_completo.list[0].temp.day,10));
+	$('#tipo_dia_1').html(datos.clima_completo.list[0].weather[0].description);
+	$('#maxima_dia_1').html(parseInt(datos.clima_completo.list[0].temp.max,10));
+	$('#minima_dia_1').html(parseInt(datos.clima_completo.list[0].temp.min,10));
+	/////////////////////
+
+	for(i=0; i <2; i++){
+		$('#localidad_cercania_'+(i+1)).html(datos.ciudades_cercanas.list[i].name);
+		$('#img_cercania_'+(i+1)).attr('src','http://openweathermap.org/img/w/'+datos.ciudades_cercanas.list[i].weather[0].icon+'.png');
+		$('#temperatura_cercania_'+(i+1)).html(parseInt(datos.ciudades_cercanas.list[0].main.temp,10));	
+	}
+}
+
+
+
+module.exports = setCercanos;
+},{}],10:[function(require,module,exports){
+
+
 var setearVerMas = function setearVerMas(clima_semana){
 	var dias_completos = ['DOMINGO','LUNES','MARTES','MIERCOLES','JUEVES','VIERNES','SABADO'];
 	var fecha;
@@ -1670,7 +1696,7 @@ function velocidad_viento(dia){
 
 
 module.exports = setearVerMas;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var jQuery = require('jquery');
 
 /*! jQuery UI - v1.10.3 - 2013-05-03
@@ -16677,7 +16703,7 @@ $.widget( "ui.tooltip", {
 
 }( jQuery ) );
 
-},{"jquery":11}],11:[function(require,module,exports){
+},{"jquery":12}],12:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -25889,7 +25915,7 @@ return jQuery;
 
 }));
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*
  Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
  (c) 2010-2013, Vladimir Agafonkin
@@ -35070,4 +35096,4 @@ L.Map.include({
 
 
 }(window, document));
-},{}]},{},[1,2,3,4,5,6,7,8,9]);
+},{}]},{},[1,2,3,4,5,6,7,8,9,10]);
