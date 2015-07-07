@@ -7,6 +7,9 @@ controller.iniciar = function(){
 	$("#clima_actual").click(); // Inicio la primer vista
 	$("header").fadeIn();
 	$("footer").fadeIn();
+
+	//controller.datos.clima_completo.list[0].weather[0].id = 201;
+	controller.hay_tormenta();
 	controller.ciudades_cercanas();
 }
 
@@ -16,19 +19,17 @@ controller.get_clima_iniciar = function(posicion){
 	controller.datos.longitud = posicion.coords.longitude;
 
 	$.ajax({ 
-		type: "GET",
-		url: "http://api.openweathermap.org/data/2.5/forecast/daily?lat="+latitud+"&lon="+longitud+"&lang=es&units=metric&cnt=7&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0",
+		type: "GET", 
+		url: "http://api.openweathermap.org/data/2.5/forecast/daily?lat="+controller.datos.latitud+"&lon="+controller.datos.longitud+"&lang=es&units=metric&cnt=7&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0",
 		dataType: "json",
 		success: function (data) {
-			clima_completo = data;
+			controller.datos.clima_completo = data;
 			vars = data.list;
 			controller.iniciar();
 			/*
 			TODO:
-			Chequear si hay alerta metereoligia y cambiar la clase alert-off por alert-on
-			en el ID: #container_alerta
+			CAMBIAR EL BACKGROUND PORQUE NO ANDA
 			*/
-
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(errorThrown);
@@ -40,10 +41,11 @@ controller.ciudades_cercanas = function(){
 	//http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=3
 	$.ajax({ 
 		type: "GET",
-		url: 'http://api.openweathermap.org/data/2.5/find?lat='+latitud+'&lon='+longitud+'&cnt=3&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&cnt=3&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0',
 		dataType: "json",
 		success: function (data) {
 			console.log("Ciudades cercanas -> LISTO");
+			controller.datos.ciudades_cercanas = data;
 
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
@@ -66,6 +68,7 @@ controller.errores = function(error){
 }
 
 controller.ver_mas = function(){
+	var setearVerMas = require('./setearVerMas.js');
 	$("#ver_mas").on("click", function(){
 		if(vista_actual != 'ver_mas' && estado_vistas != true){
 			vista_actual = 'ver_mas';
@@ -73,7 +76,7 @@ controller.ver_mas = function(){
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_ver_mas.html', function(){
-					// Accion
+					setearVerMas(controller.datos.clima_completo.list);
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
@@ -83,6 +86,13 @@ controller.ver_mas = function(){
 			
 		}
 	});
+}
+
+controller.hay_tormenta = function(){
+	if(controller.datos.clima_completo.list[0].weather[0].id >= 200 && controller.datos.clima_completo.list[0].weather[0].id <= 232){
+				$('#back_clima').attr('background-image', "url('../img/back_tormenta.jpg')");
+				$('#container_alerta').attr('class','alert-on row');
+			}
 }
 
 controller.controller = function(){
@@ -98,7 +108,7 @@ controller.controller = function(){
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_actual.html', function(){
-					primerDia(vars[0]);
+					primerDia(controller.datos.clima_completo.list[0]);
 					$('.dias').on('click', function(){
 						$('.dias').removeClass('dia-selected');
 						$(this).addClass('dia-selected');

@@ -19,10 +19,6 @@ var cambiarDia = function cambiarDia(contenido,id){
 		}
 		i++;
 	}
-	/*
-	TODO: cambiar el 'ahora' por 'Mañana' o el dia que le siga completo
-	$('#dia_seleccionado')
-	*/
 
 	$('#clima_icon').effect("fade", 500, function(){
 		$(this).attr('src', 'http://openweathermap.org/img/w/'+vars[auxiliar].weather[0].icon+'.png');
@@ -41,10 +37,24 @@ var cambiarDia = function cambiarDia(contenido,id){
 	}).effect("fade", 500);
 
 
+	if(id == 'dia_2'){
+		$('#dia_seleccionado').effect("fade", 500, function(){
+			$(this).html('MAÑANA');
+		}).effect("fade", 500);
+	}else if(id != 'dia_1'){
+		$('#dia_seleccionado').effect("fade", 500, function(){
+			$(this).html(dias_completos[i-1]);
+		}).effect("fade", 500);
+	}
+
 	if(id == 'dia_1'){
 		$('#dia_anterior').effect("fade", 500, function(){
 			$('#dia_anterior').empty();	
 		});
+		$('#dia_seleccionado').effect("fade", 500, function(){
+			$(this).html('AHORA');
+		}).effect("fade", 500);
+
 	}else {
 		if($('#dia_anterior').css('display') == 'none'){
 			$('#dia_anterior').effect("fade", 500, function(){
