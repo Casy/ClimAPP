@@ -21,10 +21,58 @@ header img{
 }
 
 #back_clima{
-	background-image: url('../img/back_nice_day.png');
 	margin-top: -1px;
 	padding-top: 20px;
 }
+
+.back_dia{
+	background-image: url('../img/back_dia.jpg');
+}
+
+.back_noche{
+	background-image: url('../img/back_noche.jpg');
+}
+
+.back_dia_nublado{
+	background-image: url('../img/back_dia_nublado.jpg');
+}
+
+.back_noche_nubaldo{
+	background-image: url('../img/back_noche_nubaldo.jpg');
+}
+
+.back_dia_lluvioso{
+	background-image: url('../img/back_dia_lluvioso.jpg');
+}
+
+.back_noche_lluvioso{
+	background-image: url('../img/back_noche_lluvioso.jpg');
+}
+
+.back_dia_nieve{
+	background-image: url('../img/back_dia_nieve.jpg');
+}
+
+.back_noche_nieve{
+	background-image: url('../img/back_noche_nieve.jpg');
+}
+
+.back_dia_tormenta{
+	background-image: url('../img/back_dia_tormenta.jpg');
+}
+
+.back_noche_tormenta{
+	background-image: url('../img/back_noche_tormenta.jpg');
+}
+
+.back_dia_neblina{
+	background-image: url('../img/back_dia_neblina.jpg');
+}
+
+.back_noche_neblina{
+	background-image: url('../img/back_noche_neblina.jpg');
+}
+
 
 #back_mapa{
 	height: 478px;
