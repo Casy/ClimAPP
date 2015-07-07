@@ -1,16 +1,19 @@
 var controller = {}
 
+controller.datos = {};
+
 controller.iniciar = function(){
 	controller.controller();
 	$("#clima_actual").click(); // Inicio la primer vista
 	$("header").fadeIn();
 	$("footer").fadeIn();
+	controller.ciudades_cercanas();
 }
 
 controller.get_clima_iniciar = function(posicion){
 
-	latitud = posicion.coords.latitude;
-	longitud = posicion.coords.longitude;
+	controller.datos.latitud = posicion.coords.latitude;
+	controller.datos.longitud = posicion.coords.longitude;
 
 	$.ajax({ 
 		type: "GET",
@@ -19,7 +22,6 @@ controller.get_clima_iniciar = function(posicion){
 		success: function (data) {
 			clima_completo = data;
 			vars = data.list;
-			console.log(data);
 			controller.iniciar();
 			/*
 			TODO:
