@@ -1,0 +1,68 @@
+[33mcommit 2b3587ffc91b0b9f2a762983ee4d888f1cbd20df[m
+Author: gonzaldd <gonzalodedomingo@gmail.com>
+Date:   Tue Jul 7 17:38:02 2015 -0300
+
+    Vista "ver_mas" completa
+
+[33mcommit 03a50f04c1ebac1df4fee8597eaa11faa6c76846[m
+Author: gonzaldd <gonzalodedomingo@gmail.com>
+Date:   Tue Jul 7 16:26:39 2015 -0300
+
+    Cambio de dias terminado
+
+[33mcommit 50eae80fc910430cba86be8fb10b9698daca29aa[m
+Merge: 072307a e36cb83
+Author: Casy <el.casy@gmail.com>
+Date:   Tue Jul 7 13:56:26 2015 -0300
+
+    Merge pull request #1 from Casy/Disaster
+    
+    Pull Disaster -> Master
+
+[33mcommit e36cb83de2fa68599e2a8cd769fab9408e2fb64a[m
+Author: Casy <el.casy@gmail.com>
+Date:   Tue Jul 7 12:39:24 2015 -0300
+
+    Pequeños cambios
+
+[33mcommit e56ede805628e6cc8a3a7025e1f3d9b5f23a2109[m
+Author: Casy <el.casy@gmail.com>
+Date:   Tue Jul 7 01:58:08 2015 -0300
+
+    Borrando archivos que no sirven
+
+[33mcommit 916f94409f1f101eb5de2b1fd51a6dadea1421ad[m
+Author: Casy <el.casy@gmail.com>
+Date:   Tue Jul 7 01:57:14 2015 -0300
+
+    Add Controller + Effects
+
+[33mcommit 072307a7243f9f94480324b9bd394674cf7c4f65[m
+Author: Casy <el.casy@gmail.com>
+Date:   Mon Jul 6 19:30:32 2015 -0300
+
+    Update .gitignore
+
+[33mcommit 61e32b03f5c7fbf8a813a9567c1de259cec9b251[m
+Author: gonzaldd <gonzalodedomingo@gmail.com>
+Date:   Mon Jul 6 19:21:43 2015 -0300
+
+    Json de las ciudades cercanas
+
+[33mcommit 6bc908cb8dbed05d645a65264a6f5de16ab0f5ab[m
+Author: gonzaldd <gonzalodedomingo@gmail.com>
+Date:   Mon Jul 6 18:57:14 2015 -0300
+
+    Add Grunt
+
+[33mcommit 0f6304d0e56fa556ec02e7ffde4b65d768b6a48b[m
+Author: gonzaldd <gonzalodedomingo@gmail.com>
+Date:   Mon Jul 6 18:46:40 2015 -0300
+
+    Primero commit
+
+[33mcommit 973506d294a675be2f1872b39848fa0b472d616b[m
+Author: Casy <el.casy@gmail.com>
+Date:   Mon Jul 6 18:42:44 2015 -0300
+
+    Ignorando CRAP

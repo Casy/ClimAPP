@@ -1,6 +1,6 @@
 
 
-var generarMapa = function mapa(){
+var generarMapa = function mapa(latitud, longitud){
 	//MAPA CREACION
 	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
