@@ -1,13 +1,18 @@
+
 body{
 	font-family: 'Dosis', sans-serif;
 	color: #FFF;
 	text-align: center;
 	font-size: 20px;
+	background-color: #0076bf;
 }
 
 header{
 	background-color: #0076bf;
 	height: 92px;
+}
+content{
+	width:100%;
 }
 
 header img{
@@ -16,15 +21,16 @@ header img{
 }
 
 #back_clima{
-	height: 478px;
 	background-image: url('../img/back_nice_day.png');
 	margin-top: -1px;
+	padding-top: 20px;
 }
 
 #back_mapa{
 	height: 478px;
 	background-image: url('../img/back_vista_mapa.jpg');
 	margin-top: -1px;
+	padding-top: 30px;
 }
 
 #container_alerta{
@@ -33,10 +39,12 @@ header img{
 
 .alert-on{
 	background-color: #dd5249;
+	display: inherit;
 }
 
 .alert-off{
 	visibility: hidden;
+	  display: none;
 }
 
 .alert-off .alerta-display{
@@ -243,4 +251,42 @@ h2{
 	min-height: 400px;
 	border: 2px solid #FFF;
 	overflow: hidden;
+}
+
+.load-state{
+	width: 100%;
+	height: 100%;
+	min-height: 600px;
+	padding-top: 20%;
+}
+
+.load-state img{
+	padding-bottom: 20px;
+}
+
+header{
+	display: none;
+}
+
+footer{
+	display: none;
+}
+
+#clima_icon{
+	min-width: 80px;
+	min-height: 80px;
+	margin-bottom: -20px;
+}
+
+#tipo_dia_seleccionado{
+	text-transform: uppercase;
+}
+
+#dia_seleccionado{
+	font-size: 25px;
+	margin-bottom: -10px;
+}
+
+#dia_anterior{
+	display: none;
 }
