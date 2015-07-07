@@ -4,7 +4,10 @@
   "description": "",
   "main": "Gruntfile.js",
   "dependencies": {
-    "browserify": "^10.2.4"
+    "bootstrap": "^3.3.5",
+    "browserify": "^10.2.4",
+    "font-awesome": "^4.3.0",
+    "jquery-ui": "^1.10.5"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
