@@ -192,10 +192,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
-
 					controller.set_background();
-					generarMapa(controller.datos.latitud, controller.datos.longitud);///GENERADOR DEL MAPA
-					setCercanos(controller.datos);
 					generarMapa(controller.datos.latitud, controller.datos.longitud, 9, 9);///GENERADOR DEL MAPA
 					setCercanos(controller.datos); //Dos ciudades cercanas EN EL MAPA
 					$(this).effect('fade', 1000, function(){
