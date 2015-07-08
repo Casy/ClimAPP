@@ -105,7 +105,7 @@ controller.controller = function(){
 	$("#clima_actual").on("click", function(){
 		if(vista_actual != 'clima_actual' && estado_vistas != true){
 			vista_actual = 'clima_actual';
-			estado_vistas = true;
+			estado_vistas = true; 
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_actual.html', function(){

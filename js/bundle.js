@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	}
 
 });
-},{"./controller":3,"./leaflet-openweathermap":6,"jquery":12,"jquery-ui":11,"leaflet":13}],2:[function(require,module,exports){
+},{"./controller":3,"./leaflet-openweathermap":5,"jquery":11,"jquery-ui":10,"leaflet":12}],2:[function(require,module,exports){
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -218,7 +218,7 @@ controller.controller = function(){
 	$("#clima_actual").on("click", function(){
 		if(vista_actual != 'clima_actual' && estado_vistas != true){
 			vista_actual = 'clima_actual';
-			estado_vistas = true;
+			estado_vistas = true; 
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_actual.html', function(){
@@ -322,40 +322,7 @@ controller.controller = function(){
 }
 
 module.exports = controller;
-},{"./cambiarDia.js":2,"./generarMapa.js":5,"./organizarDias.js":7,"./primerDia.js":8,"./setCercanos.js":9,"./setearVerMas.js":10}],4:[function(require,module,exports){
-
-
-var diaSemana = function diaSemana(day){
-
-	var fecha = new Date(day*1000);
-	var cadena = fecha.getDate()+'/'+fecha.getMonth();
-	var dia; 
- 	
-	console.log(cadena);
-	console.log(fecha.getDay());
-	switch(fecha.getDay()){
-		case 0: dia = 'dia_7';
-			break;
-		case 1: dia = 'dia_1';
-			break;
-		case 2: dia = 'dia_2';
-			break;
-		case 3: dia = 'dia_3';
-			break;
-		case 4: dia = 'dia_4';
-			break;
-		case 5: dia = 'dia_5';
-			break;
-		case 6: dia = 'dia_6';
-			break;
-	}
-	return dia;
-}
-
-
-
-module.exports = diaSemana;
-},{}],5:[function(require,module,exports){
+},{"./cambiarDia.js":2,"./generarMapa.js":4,"./organizarDias.js":6,"./primerDia.js":7,"./setCercanos.js":8,"./setearVerMas.js":9}],4:[function(require,module,exports){
 
 
 var generarMapa = function mapa(latitud, longitud){
@@ -372,7 +339,7 @@ var generarMapa = function mapa(latitud, longitud){
 };
 
 module.exports = generarMapa;
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * A JavaScript library for using OpenWeatherMap's layers and OWM's city/station data for leaflet based maps without hassle.
  * License: CC0 (Creative Commons Zero), see http://creativecommons.org/publicdomain/zero/1.0/
@@ -1574,7 +1541,7 @@ L.OWM.Utils = {
 	}
 };
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 
 
 var organizarDias = function organizarDias(dia){
@@ -1598,7 +1565,7 @@ var organizarDias = function organizarDias(dia){
 
 
 module.exports = organizarDias;
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var organizarDias = require('./organizarDias.js');
 
 var primerDia = function(diaActual){
@@ -1613,7 +1580,7 @@ var primerDia = function(diaActual){
 
 
 module.exports = primerDia;
-},{"./organizarDias.js":7}],9:[function(require,module,exports){
+},{"./organizarDias.js":6}],8:[function(require,module,exports){
 
 
 var setCercanos = function setCercanos(datos){
@@ -1637,7 +1604,7 @@ var setCercanos = function setCercanos(datos){
 
 
 module.exports = setCercanos;
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
 
 var setearVerMas = function setearVerMas(clima_semana){
@@ -1696,7 +1663,7 @@ function velocidad_viento(dia){
 
 
 module.exports = setearVerMas;
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var jQuery = require('jquery');
 
 /*! jQuery UI - v1.10.3 - 2013-05-03
@@ -16703,7 +16670,7 @@ $.widget( "ui.tooltip", {
 
 }( jQuery ) );
 
-},{"jquery":12}],12:[function(require,module,exports){
+},{"jquery":11}],11:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -25915,7 +25882,7 @@ return jQuery;
 
 }));
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*
  Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
  (c) 2010-2013, Vladimir Agafonkin
@@ -35096,4 +35063,4 @@ L.Map.include({
 
 
 }(window, document));
-},{}]},{},[1,2,3,4,5,6,7,8,9,10]);
+},{}]},{},[1,2,3,4,5,6,7,8,9]);
