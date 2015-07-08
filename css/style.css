@@ -124,7 +124,6 @@ header img{
 #container_clima{
 	background-color: rgba(0,0,0,0.4);
 	background-repeat: no-repeat;
-	background-attachment: fixed;
 	background-position: center center;
 	z-index: 1;
 	padding-top: 30px;
