@@ -36,62 +36,66 @@
           <img class="img-responsive center-block" src="img/CLIMAPP.png"/>
         </div>
       </header>
-      <div id="container_alerta" class="alert-off row">
+      <div id="container_alerta" class="alert-off col-md-12 row">
         <div class="col-md-4 col-md-offset-4 alerta-display">
-          <p><img src="img/alerta_icon.png"/>
-            ALERTA METEOROLÓGICO <span class="plus">+</span></p>
-          </div>
+          <p>
+            <img src="img/alerta_icon.png"/>
+            ALERTA METEOROLÓGICO <span class="plus">+</span>
+          </p>
         </div>
+      </div>
+      <div class="row" id="container_clima">
         <content>
 
         </content>
-        <footer class="row">
-          <div class="col-md-12 space-light-blue"></div>
-          <div class="col-md-12 footer-options">
-            <div class="row">
-              <div class="col-md-4">
-                <div id="mapa_zona" class="mapa">
-                  <img src="img/mapa.jpg" class="center-block img-responsive"/>
-                  <div class="back-ver-mapa">MAPA DE TU ZONA</div>
-                </div>
+      </div>
+      <footer class="row">
+        <div class="col-md-12 space-light-blue"></div>
+        <div class="col-md-12 footer-options">
+          <div class="row">
+            <div class="col-md-4">
+              <div id="mapa_zona" class="mapa">
+                <img src="img/mapa.jpg" class="center-block img-responsive"/>
+                <div class="back-ver-mapa">MAPA DE TU ZONA</div>
               </div>
-              <div class="col-md-7 col-md-offset-1">
-                <div class="back-icons row">
-                  <div class="col-md-3 border-r" id="clima_actual">
-                    <span class="fa-stack fa-2x">
-                      <i class="fa fa-circle-thin fa-stack-2x"></i>
-                      <i class="fa fa-cloud fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <div>CLIMA ACTUAL</div>
-                  </div>
-                  <div class="col-md-3 border-r" id="clima_cercanias">
-                    <span class="fa-stack fa-2x">
-                      <i class="fa fa-circle-thin fa-stack-2x"></i>
-                      <i class="fa fa-umbrella fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <div>CLIMA EN CERCANIAS</div>
-                  </div>
-                  <div class="col-md-3 border-r" id="ver_mapa">
-                    <span class="fa-stack fa-2x">
-                      <i class="fa fa-circle-thin fa-stack-2x"></i>
-                      <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <div>MAPA</div>
-                  </div>
-                  <div class="col-md-3"  id="estadisticas">
-                    <span class="fa-stack fa-2x">
-                      <i class="fa fa-circle-thin fa-stack-2x"></i>
-                      <i class="fa fa-pie-chart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <div>ESTADISTICAS</div>
-                  </div>
+            </div>
+            <div class="col-md-7 col-md-offset-1">
+              <div class="back-icons row">
+                <div class="col-md-3 border-r" id="clima_actual">
+                  <span class="fa-stack fa-2x">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-cloud fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <div>CLIMA ACTUAL</div>
+                </div>
+                <div class="col-md-3 border-r" id="clima_cercanias">
+                  <span class="fa-stack fa-2x">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-umbrella fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <div>CLIMA EN CERCANIAS</div>
+                </div>
+                <div class="col-md-3 border-r" id="ver_mapa">
+                  <span class="fa-stack fa-2x">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <div>MAPA</div>
+                </div>
+                <div class="col-md-3"  id="estadisticas">
+                  <span class="fa-stack fa-2x">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-pie-chart fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <div>ESTADISTICAS</div>
                 </div>
               </div>
             </div>
           </div>
-        </footer>
+        </div>
+      </footer>
 
 
-        <script src="js/bundle.js"></script>
-      </body>
-      </html>
+      <script src="js/bundle.js"></script>
+    </body>
+    </html>

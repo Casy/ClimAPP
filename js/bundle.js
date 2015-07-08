@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	}
 
 });
-},{"./controller":4,"./leaflet-openweathermap":7,"jquery":13,"jquery-ui":12,"leaflet":14}],2:[function(require,module,exports){
+},{"./controller":4,"./leaflet-openweathermap":8,"jquery":14,"jquery-ui":13,"leaflet":15}],2:[function(require,module,exports){
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -138,7 +138,7 @@ function velocidad_viento(dia){
 }
 
 module.exports = clima_cercanias;
-},{"./direccion_viento":5}],4:[function(require,module,exports){
+},{"./direccion_viento":6}],4:[function(require,module,exports){
 var controller = {}
 
 controller.datos = {};
@@ -281,6 +281,17 @@ controller.set_background = function(){
 	}
 }
 
+controller.movimiento = function(){
+	$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
+	$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
+	$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
+	$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
+	$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
+	$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
+	$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
+	$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
+} 
+
 controller.controller = function(){
 	var cambiarDia = require('./cambiarDia.js');
 	var organizarDias = require('./organizarDias.js');
@@ -404,19 +415,41 @@ controller.controller = function(){
 
 }
 
-controller.movimiento = function(){
-					$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
-					$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
-					$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
-					$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
-					$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
-					$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
-					$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
-					$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
-} 
-
 module.exports = controller;
-},{"./cambiarDia.js":2,"./clima_cercanias.js":3,"./generarMapa.js":6,"./organizarDias.js":8,"./primerDia.js":9,"./setCercanos.js":10,"./setearVerMas.js":11}],5:[function(require,module,exports){
+},{"./cambiarDia.js":2,"./clima_cercanias.js":3,"./generarMapa.js":7,"./organizarDias.js":9,"./primerDia.js":10,"./setCercanos.js":11,"./setearVerMas.js":12}],5:[function(require,module,exports){
+
+
+var diaSemana = function diaSemana(day){
+
+	var fecha = new Date(day*1000);
+	var cadena = fecha.getDate()+'/'+fecha.getMonth();
+	var dia; 
+ 	
+	console.log(cadena);
+	console.log(fecha.getDay());
+	switch(fecha.getDay()){
+		case 0: dia = 'dia_7';
+			break;
+		case 1: dia = 'dia_1';
+			break;
+		case 2: dia = 'dia_2';
+			break;
+		case 3: dia = 'dia_3';
+			break;
+		case 4: dia = 'dia_4';
+			break;
+		case 5: dia = 'dia_5';
+			break;
+		case 6: dia = 'dia_6';
+			break;
+	}
+	return dia;
+}
+
+
+
+module.exports = diaSemana;
+},{}],6:[function(require,module,exports){
 
 var direccion_viento = function direccion_viento(dia_viento){
 	var grados = dia_viento.deg;
@@ -444,7 +477,7 @@ var direccion_viento = function direccion_viento(dia_viento){
 }
 
 module.exports = direccion_viento;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 
 
 var generarMapa = function mapa(latitud, longitud, zoomMax,zoomMin){
@@ -461,7 +494,7 @@ var generarMapa = function mapa(latitud, longitud, zoomMax,zoomMin){
 };
 
 module.exports = generarMapa;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * A JavaScript library for using OpenWeatherMap's layers and OWM's city/station data for leaflet based maps without hassle.
  * License: CC0 (Creative Commons Zero), see http://creativecommons.org/publicdomain/zero/1.0/
@@ -1663,7 +1696,7 @@ L.OWM.Utils = {
 	}
 };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
 
 var organizarDias = function organizarDias(dia){
@@ -1687,7 +1720,7 @@ var organizarDias = function organizarDias(dia){
 
 
 module.exports = organizarDias;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var organizarDias = require('./organizarDias.js');
 
 var primerDia = function(diaActual){
@@ -1702,7 +1735,7 @@ var primerDia = function(diaActual){
 
 
 module.exports = primerDia;
-},{"./organizarDias.js":8}],10:[function(require,module,exports){
+},{"./organizarDias.js":9}],11:[function(require,module,exports){
 
 
 var setCercanos = function setCercanos(datos){
@@ -1726,7 +1759,7 @@ var setCercanos = function setCercanos(datos){
 
 
 module.exports = setCercanos;
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var direccion_viento = require('./direccion_viento.js');
 
 var setearVerMas = function setearVerMas(clima_semana){
@@ -1760,7 +1793,7 @@ function velocidad_viento(dia){
 
 
 module.exports = setearVerMas;
-},{"./direccion_viento.js":5}],12:[function(require,module,exports){
+},{"./direccion_viento.js":6}],13:[function(require,module,exports){
 var jQuery = require('jquery');
 
 /*! jQuery UI - v1.10.3 - 2013-05-03
@@ -16767,7 +16800,7 @@ $.widget( "ui.tooltip", {
 
 }( jQuery ) );
 
-},{"jquery":13}],13:[function(require,module,exports){
+},{"jquery":14}],14:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -25979,7 +26012,7 @@ return jQuery;
 
 }));
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*
  Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
  (c) 2010-2013, Vladimir Agafonkin
@@ -35160,4 +35193,4 @@ L.Map.include({
 
 
 }(window, document));
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11]);
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12]);

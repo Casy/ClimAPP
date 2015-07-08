@@ -41,6 +41,14 @@ header img{
 	background-image: url('../img/BACK/back_noche_nubaldo.jpg');
 }
 
+.back_dia_poco_nublado{
+	background-image: url('../img/BACK/back_dia_poco_nublado.jpg');
+}
+
+.back_noche_poco_nublado{
+	background-image: url('../img/BACK/back_noche_poco_nublado.jpg');
+}
+
 .back_dia_lluvioso{
 	background-image: url('../img/BACK/back_dia_lluvioso.jpg');
 }
@@ -114,6 +122,7 @@ header img{
 }
 
 #container_clima{
+	width: 100%;
 	background-color: rgba(0,0,0,0.4);
 	background-repeat: no-repeat;
 	background-attachment: fixed;

@@ -140,6 +140,17 @@ controller.set_background = function(){
 	}
 }
 
+controller.movimiento = function(){
+	$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
+	$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
+	$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
+	$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
+	$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
+	$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
+	$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
+	$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
+} 
+
 controller.controller = function(){
 	var cambiarDia = require('./cambiarDia.js');
 	var organizarDias = require('./organizarDias.js');
@@ -262,16 +273,5 @@ controller.controller = function(){
 	});
 
 }
-
-controller.movimiento = function(){
-					$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
-					$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
-					$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
-					$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
-					$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
-					$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
-					$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
-					$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
-} 
 
 module.exports = controller;
