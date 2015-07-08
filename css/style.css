@@ -73,7 +73,6 @@ header img{
 	background-image: url('../img/BACK/back_noche_neblina.jpg');
 }
 
-
 #back_mapa{
 	height: 478px;
 	background-image: url('../img/BACK/back_vista_mapa.jpg');
@@ -92,14 +91,12 @@ header img{
 
 .alert-off{
 	visibility: hidden;
-	  display: none;
+	display: none;
 }
 
 .alert-off .alerta-display{
 	display: none;
 }
-
-
 
 .alert-on p{
 	margin: 0px;
@@ -117,10 +114,12 @@ header img{
 }
 
 #container_clima{
-	margin-bottom: 10px;
 	background-color: rgba(0,0,0,0.4);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center center;
 	z-index: 1;
-	margin-top: -2px;
+	padding-top: 30px;
 }
 
 .padding-t-20{
@@ -244,10 +243,12 @@ header img{
 }
 
 .min_max_ver_mas{
-	margin-left: 30px;
-	margin-right: 35px;
+	margin-left: 13px;
+	margin-right: 13px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid #FFF;
+	font-size: 18px;
+	text-transform: uppercase;
 }
 
 .no-margin-p p{

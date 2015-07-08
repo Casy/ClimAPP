@@ -7,8 +7,6 @@ controller.iniciar = function(){
 	$("#clima_actual").click(); // Inicio la primer vista
 	$("header").fadeIn();
 	$("footer").fadeIn();
-
-	//controller.datos.clima_completo.list[0].weather[0].id = 201;
 	controller.hay_tormenta();
 	controller.ciudades_cercanas();
 }
@@ -26,10 +24,6 @@ controller.get_clima_iniciar = function(posicion){
 			controller.datos.clima_completo = data;
 			vars = data.list;
 			controller.iniciar();
-			/*
-			TODO:
-			CAMBIAR EL BACKGROUND PORQUE NO ANDA
-			*/
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(errorThrown);
@@ -76,6 +70,7 @@ controller.ver_mas = function(){
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_ver_mas.html', function(){
+					controller.set_background();
 					setearVerMas(controller.datos.clima_completo.list);//VER MAS VISTA
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -90,9 +85,59 @@ controller.ver_mas = function(){
 
 controller.hay_tormenta = function(){
 	if(controller.datos.clima_completo.list[0].weather[0].id >= 200 && controller.datos.clima_completo.list[0].weather[0].id <= 232){
-				$('#back_clima').attr('background-image', "url('../img/back_tormenta.jpg')");
-				$('#container_alerta').attr('class','alert-on row');
-			}
+		$('#container_alerta').attr('class','alert-on row');
+	}
+}
+
+controller.set_background = function(){
+	switch(this.datos.clima_completo.list[0].weather[0].icon){
+		case '01d':
+		$('#container_clima').addClass('back_dia');
+		break;
+		case '01n':
+		$('#container_clima').addClass('back_noche');
+		break;
+		case '02d':
+		$('#container_clima').addClass('back_dia_poco_nublado');
+		break;
+		case '02n':
+		$('#container_clima').addClass('back_noche_poco_nublado');
+		break;
+		case '03d':
+		case '04d':
+		$('#container_clima').addClass('back_dia_nublado');
+		break;
+		case '03n':
+		case '04n':
+		$('#container_clima').addClass('back_noche_nublado');
+		break;
+		case '09d':
+		case '10d':
+		$('#container_clima').addClass('back_dia_lluvioso');
+		break;
+		case '09n':
+		case '10n':
+		$('#container_clima').addClass('back_noche_lluvioso');
+		break;
+		case '11d':
+		$('#container_clima').addClass('back_dia_tormenta');
+		break;
+		case '11n':
+		$('#container_clima').addClass('back_dia_tormenta');
+		break;
+		case '13d':
+		$('#container_clima').addClass('back_dia_nieve');
+		break;
+		case '13n':
+		$('#container_clima').addClass('back_noche_nieve');
+		break;
+		case '50d':
+		$('#container_clima').addClass('back_dia_neblina');
+		break;
+		case '50n':
+		$('#container_clima').addClass('back_noche_neblina');
+		break;
+	}
 }
 
 controller.controller = function(){
@@ -109,6 +154,7 @@ controller.controller = function(){
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_actual.html', function(){
+					controller.set_background();
 					primerDia(controller.datos.clima_completo.list[0]);
 					$('.dias').on('click', function(){
 						$('.dias').removeClass('dia-selected');
@@ -145,6 +191,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
+					controller.set_background();
 					generarMapa(controller.datos.latitud, controller.datos.longitud);///GENERADOR DEL MAPA
 					setCercanos(controller.datos);
 					$(this).effect('fade', 1000, function(){
@@ -162,6 +209,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_cercanias.html', function(){
+					controller.set_background();
 					// Accion
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -180,6 +228,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
+					controller.set_background();
 					// Accion
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -197,6 +246,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/estadisticas.html', function(){
+					controller.set_background();
 					// Accion
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			

@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	}
 
 });
-},{"./controller":3,"./leaflet-openweathermap":5,"jquery":11,"jquery-ui":10,"leaflet":12}],2:[function(require,module,exports){
+},{"./controller":3,"./leaflet-openweathermap":6,"jquery":12,"jquery-ui":11,"leaflet":13}],2:[function(require,module,exports){
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -120,8 +120,6 @@ controller.iniciar = function(){
 	$("#clima_actual").click(); // Inicio la primer vista
 	$("header").fadeIn();
 	$("footer").fadeIn();
-
-	//controller.datos.clima_completo.list[0].weather[0].id = 201;
 	controller.hay_tormenta();
 	controller.ciudades_cercanas();
 }
@@ -139,10 +137,6 @@ controller.get_clima_iniciar = function(posicion){
 			controller.datos.clima_completo = data;
 			vars = data.list;
 			controller.iniciar();
-			/*
-			TODO:
-			CAMBIAR EL BACKGROUND PORQUE NO ANDA
-			*/
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(errorThrown);
@@ -189,6 +183,7 @@ controller.ver_mas = function(){
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_ver_mas.html', function(){
+					controller.set_background();
 					setearVerMas(controller.datos.clima_completo.list);//VER MAS VISTA
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -203,9 +198,59 @@ controller.ver_mas = function(){
 
 controller.hay_tormenta = function(){
 	if(controller.datos.clima_completo.list[0].weather[0].id >= 200 && controller.datos.clima_completo.list[0].weather[0].id <= 232){
-				$('#back_clima').attr('background-image', "url('../img/back_tormenta.jpg')");
-				$('#container_alerta').attr('class','alert-on row');
-			}
+		$('#container_alerta').attr('class','alert-on row');
+	}
+}
+
+controller.set_background = function(){
+	switch(this.datos.clima_completo.list[0].weather[0].icon){
+		case '01d':
+		$('#container_clima').addClass('back_dia');
+		break;
+		case '01n':
+		$('#container_clima').addClass('back_noche');
+		break;
+		case '02d':
+		$('#container_clima').addClass('back_dia_poco_nublado');
+		break;
+		case '02n':
+		$('#container_clima').addClass('back_noche_poco_nublado');
+		break;
+		case '03d':
+		case '04d':
+		$('#container_clima').addClass('back_dia_nublado');
+		break;
+		case '03n':
+		case '04n':
+		$('#container_clima').addClass('back_noche_nublado');
+		break;
+		case '09d':
+		case '10d':
+		$('#container_clima').addClass('back_dia_lluvioso');
+		break;
+		case '09n':
+		case '10n':
+		$('#container_clima').addClass('back_noche_lluvioso');
+		break;
+		case '11d':
+		$('#container_clima').addClass('back_dia_tormenta');
+		break;
+		case '11n':
+		$('#container_clima').addClass('back_dia_tormenta');
+		break;
+		case '13d':
+		$('#container_clima').addClass('back_dia_nieve');
+		break;
+		case '13n':
+		$('#container_clima').addClass('back_noche_nieve');
+		break;
+		case '50d':
+		$('#container_clima').addClass('back_dia_neblina');
+		break;
+		case '50n':
+		$('#container_clima').addClass('back_noche_neblina');
+		break;
+	}
 }
 
 controller.controller = function(){
@@ -222,6 +267,7 @@ controller.controller = function(){
 			
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_actual.html', function(){
+					controller.set_background();
 					primerDia(controller.datos.clima_completo.list[0]);
 					$('.dias').on('click', function(){
 						$('.dias').removeClass('dia-selected');
@@ -258,6 +304,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
+					controller.set_background();
 					generarMapa(controller.datos.latitud, controller.datos.longitud);///GENERADOR DEL MAPA
 					setCercanos(controller.datos);
 					$(this).effect('fade', 1000, function(){
@@ -275,6 +322,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_cercanias.html', function(){
+					controller.set_background();
 					// Accion
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -293,6 +341,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
+					controller.set_background();
 					// Accion
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -310,6 +359,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/estadisticas.html', function(){
+					controller.set_background();
 					// Accion
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -322,7 +372,40 @@ controller.controller = function(){
 }
 
 module.exports = controller;
-},{"./cambiarDia.js":2,"./generarMapa.js":4,"./organizarDias.js":6,"./primerDia.js":7,"./setCercanos.js":8,"./setearVerMas.js":9}],4:[function(require,module,exports){
+},{"./cambiarDia.js":2,"./generarMapa.js":5,"./organizarDias.js":7,"./primerDia.js":8,"./setCercanos.js":9,"./setearVerMas.js":10}],4:[function(require,module,exports){
+
+
+var diaSemana = function diaSemana(day){
+
+	var fecha = new Date(day*1000);
+	var cadena = fecha.getDate()+'/'+fecha.getMonth();
+	var dia; 
+ 	
+	console.log(cadena);
+	console.log(fecha.getDay());
+	switch(fecha.getDay()){
+		case 0: dia = 'dia_7';
+			break;
+		case 1: dia = 'dia_1';
+			break;
+		case 2: dia = 'dia_2';
+			break;
+		case 3: dia = 'dia_3';
+			break;
+		case 4: dia = 'dia_4';
+			break;
+		case 5: dia = 'dia_5';
+			break;
+		case 6: dia = 'dia_6';
+			break;
+	}
+	return dia;
+}
+
+
+
+module.exports = diaSemana;
+},{}],5:[function(require,module,exports){
 
 
 var generarMapa = function mapa(latitud, longitud){
@@ -339,7 +422,7 @@ var generarMapa = function mapa(latitud, longitud){
 };
 
 module.exports = generarMapa;
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * A JavaScript library for using OpenWeatherMap's layers and OWM's city/station data for leaflet based maps without hassle.
  * License: CC0 (Creative Commons Zero), see http://creativecommons.org/publicdomain/zero/1.0/
@@ -1541,7 +1624,7 @@ L.OWM.Utils = {
 	}
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 
 
 var organizarDias = function organizarDias(dia){
@@ -1565,7 +1648,7 @@ var organizarDias = function organizarDias(dia){
 
 
 module.exports = organizarDias;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var organizarDias = require('./organizarDias.js');
 
 var primerDia = function(diaActual){
@@ -1580,7 +1663,7 @@ var primerDia = function(diaActual){
 
 
 module.exports = primerDia;
-},{"./organizarDias.js":6}],8:[function(require,module,exports){
+},{"./organizarDias.js":7}],9:[function(require,module,exports){
 
 
 var setCercanos = function setCercanos(datos){
@@ -1604,7 +1687,7 @@ var setCercanos = function setCercanos(datos){
 
 
 module.exports = setCercanos;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 
 var setearVerMas = function setearVerMas(clima_semana){
@@ -1663,7 +1746,7 @@ function velocidad_viento(dia){
 
 
 module.exports = setearVerMas;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var jQuery = require('jquery');
 
 /*! jQuery UI - v1.10.3 - 2013-05-03
@@ -16670,7 +16753,7 @@ $.widget( "ui.tooltip", {
 
 }( jQuery ) );
 
-},{"jquery":11}],11:[function(require,module,exports){
+},{"jquery":12}],12:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -25882,7 +25965,7 @@ return jQuery;
 
 }));
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*
  Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
  (c) 2010-2013, Vladimir Agafonkin
@@ -35063,4 +35146,4 @@ L.Map.include({
 
 
 }(window, document));
-},{}]},{},[1,2,3,4,5,6,7,8,9]);
+},{}]},{},[1,2,3,4,5,6,7,8,9,10]);
