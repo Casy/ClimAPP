@@ -182,7 +182,7 @@ controller.ciudades_cercanas = function(){
 	//http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=3
 	$.ajax({ 
 		type: "GET",
-		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=4&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=4&mode=json&lang=sp&APPID=c44a164d60b023ea3f628c7677c0d6b0',
 		dataType: "json",
 		success: function (data) {
 			console.log("Ciudades cercanas -> LISTO");
@@ -315,7 +315,6 @@ controller.controller = function(){
 		}
 	});
 
-
 	$("#ver_mapa").on("click", function(){
 		if(vista_actual != 'ver_mapa' && estado_vistas != true){
 			vista_actual = 'ver_mapa';
@@ -323,7 +322,15 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
 					generarMapa(controller.datos.latitud, controller.datos.longitud, 16, 3);
-					$(this).effect('fade', 1000, function(){
+					$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
+					$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
+					$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
+					$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
+					$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
+					$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
+					$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
+					$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
+					$(this).effect('fade', 1000, function(){ 
 						estado_vistas = false;			
 					})
 				});
