@@ -192,14 +192,12 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
-<<<<<<< HEAD
+
 					controller.set_background();
 					generarMapa(controller.datos.latitud, controller.datos.longitud);///GENERADOR DEL MAPA
 					setCercanos(controller.datos);
-=======
 					generarMapa(controller.datos.latitud, controller.datos.longitud, 9, 9);///GENERADOR DEL MAPA
 					setCercanos(controller.datos); //Dos ciudades cercanas EN EL MAPA
->>>>>>> a6df0d91375e2b16c649052b2a68a5ae758dc030
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
@@ -215,12 +213,9 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_cercanias.html', function(){
-<<<<<<< HEAD
 					controller.set_background();
 					// Accion
-=======
 					clima_cercanias(controller.datos.ciudades_cercanas); //Setea las 4 ciudades cercanas
->>>>>>> a6df0d91375e2b16c649052b2a68a5ae758dc030
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
@@ -237,22 +232,10 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
-<<<<<<< HEAD
 					controller.set_background();
-					// Accion
-					$(this).effect('fade', 1000, function(){
-=======
 					generarMapa(controller.datos.latitud, controller.datos.longitud, 16, 3);
-					$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
-					$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
-					$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
-					$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
-					$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
-					$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
-					$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
-					$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
+					controller.movimiento();
 					$(this).effect('fade', 1000, function(){ 
->>>>>>> a6df0d91375e2b16c649052b2a68a5ae758dc030
 						estado_vistas = false;			
 					})
 				});
@@ -279,5 +262,16 @@ controller.controller = function(){
 	});
 
 }
+
+controller.movimiento = function(){
+					$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
+					$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
+					$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
+					$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
+					$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
+					$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
+					$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
+					$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
+} 
 
 module.exports = controller;
