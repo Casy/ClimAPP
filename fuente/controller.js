@@ -41,7 +41,7 @@ controller.ciudades_cercanas = function(){
 	//http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=3
 	$.ajax({ 
 		type: "GET",
-		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=3&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=4&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0',
 		dataType: "json",
 		success: function (data) {
 			console.log("Ciudades cercanas -> LISTO");
@@ -101,6 +101,7 @@ controller.controller = function(){
 	var generarMapa = require('./generarMapa.js');
 	var primerDia = require('./primerDia.js');
 	var setCercanos = require('./setCercanos.js');
+	var clima_cercanias = require('./clima_cercanias.js');
 
 	$("#clima_actual").on("click", function(){
 		if(vista_actual != 'clima_actual' && estado_vistas != true){
@@ -146,7 +147,7 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
 					generarMapa(controller.datos.latitud, controller.datos.longitud);///GENERADOR DEL MAPA
-					setCercanos(controller.datos);
+					setCercanos(controller.datos); //Dos ciudades cercanas EN EL MAPA
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
@@ -162,7 +163,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_cercanias.html', function(){
-					// Accion
+					clima_cercanias(controller.datos.ciudades_cercanas); //Setea las 4 ciudades cercanas
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
