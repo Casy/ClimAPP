@@ -146,7 +146,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
-					generarMapa(controller.datos.latitud, controller.datos.longitud);///GENERADOR DEL MAPA
+					generarMapa(controller.datos.latitud, controller.datos.longitud, 9, 9);///GENERADOR DEL MAPA
 					setCercanos(controller.datos); //Dos ciudades cercanas EN EL MAPA
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -181,7 +181,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
-					// Accion
+					generarMapa(controller.datos.latitud, controller.datos.longitud, 16, 3);
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})

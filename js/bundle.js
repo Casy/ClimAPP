@@ -287,7 +287,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
-					generarMapa(controller.datos.latitud, controller.datos.longitud);///GENERADOR DEL MAPA
+					generarMapa(controller.datos.latitud, controller.datos.longitud, 9, 9);///GENERADOR DEL MAPA
 					setCercanos(controller.datos); //Dos ciudades cercanas EN EL MAPA
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -322,7 +322,7 @@ controller.controller = function(){
 			estado_vistas = true;
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
-					// Accion
+					generarMapa(controller.datos.latitud, controller.datos.longitud, 16, 3);
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
@@ -382,14 +382,14 @@ module.exports = direccion_viento;
 },{}],6:[function(require,module,exports){
 
 
-var generarMapa = function mapa(latitud, longitud){
+var generarMapa = function mapa(latitud, longitud, zoomMax,zoomMin){
 	//MAPA CREACION
 	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-	var osm = new L.TileLayer(osmUrl, {minZoom: 9, maxZoom:9, attribution: osmAttrib});
-	var city = L.OWM.current({intervall: 15, imageLoadingUrl: 'img/owmloading.gif', lang: 'sp', minZoom: 9, maxZoom: 9});
+	var osm = new L.TileLayer(osmUrl, {minZoom: zoomMin, maxZoom:zoomMax, attribution: osmAttrib});
+	var city = L.OWM.current({intervall: 15, imageLoadingUrl: 'img/owmloading.gif', lang: 'sp', minZoom: zoomMin, maxZoom: zoomMax});
 	map = new L.Map('mapa_container');
-	map.setView(new L.LatLng(latitud,longitud),9);
+	map.setView(new L.LatLng(latitud,longitud),zoomMin);
 	map.addLayer(osm);
 	map.addLayer(city);
 	///////////////////////////////////////
