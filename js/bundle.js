@@ -177,7 +177,7 @@ controller.iniciar = function(){
 	$("footer").fadeIn();
 	controller.hay_tormenta();
 	controller.ciudades_cercanas();
-	controller.get_estadisticas();
+	//controller.get_estadisticas();
 }
 
 controller.get_clima_iniciar = function(posicion){
@@ -209,7 +209,7 @@ controller.ciudades_cercanas = function(){
 		success: function (data) {
 			console.log("Ciudades cercanas -> LISTO");
 			controller.datos.ciudades_cercanas = data;
-
+			controller.get_estadisticas();//Se llama a estadisticas aca, porque sino no esta definida la variable.
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(errorThrown);
@@ -336,12 +336,13 @@ controller.movimiento = function(){
 
 controller.get_estadisticas = function(){
 	//http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start={start}&cnt=8
-	var horasAtras = new Date(controller.datos.clima_completo.list[0].dt*1000);
+	//var horasAtras = new Date(controller.datos.clima_completo.list[0].dt*1000);
+	var horasAtras = new Date(controller.datos.ciudades_cercanas.list[0].dt*1000);
 	horasAtras = (horasAtras.getTime()/1000) - 18000;
 	console.log(horasAtras);
 	$.ajax({ 
 		type: "GET",
-		url: 'http://api.openweathermap.org/data/2.5/history/city?lat='+controller.datos.latitud+'&lon='+controller.datos.longitud+'&type=hour&start='+{start}+'&cnt=5&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: 'http://api.openweathermap.org/data/2.5/history/city?lat='+controller.datos.latitud+'&lon='+controller.datos.longitud+'&type=hour&start='+horasAtras+'&cnt=5&APPID=c44a164d60b023ea3f628c7677c0d6b0',
 		dataType: "json",
 		success: function (data) {
 			console.log("Estadisticas -> READY");
