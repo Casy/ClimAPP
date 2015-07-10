@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	}
 
 });
-},{"./controller":4,"./leaflet-openweathermap":8,"jquery":14,"jquery-ui":13,"leaflet":15}],2:[function(require,module,exports){
+},{"./controller":5,"./leaflet-openweathermap":8,"jquery":14,"jquery-ui":13,"leaflet":15}],2:[function(require,module,exports){
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -111,6 +111,33 @@ var cambiarDia = function cambiarDia(contenido,id){
 
 module.exports = cambiarDia; 
 },{}],3:[function(require,module,exports){
+
+var cantidad_movimiento = function(zoom){
+	var cantidad_movimiento;
+	switch(zoom){
+			case 3: cantidad_movimiento = 30.0;
+				break;
+			case 4: cantidad_movimiento = 15.0;
+				break;
+			case 5: cantidad_movimiento  = 10.0;
+				break;
+			case 6: cantidad_movimiento = 5.0;
+				break;
+			case 7: cantidad_movimiento =3.0;
+				break;
+			case 8: cantidad_movimiento = 1.5;
+				break;
+			case 9: cantidad_movimiento  = 0.6;
+				break;
+			case 10: cantidad_movimiento = 0.3;
+				break;
+		}
+		return cantidad_movimiento;
+}
+
+
+module.exports = cantidad_movimiento;
+},{}],4:[function(require,module,exports){
 var direccion_viento = require('./direccion_viento');
 
 var clima_cercanias = function clima_cercanias(ciudades){
@@ -138,7 +165,7 @@ function velocidad_viento(dia){
 }
 
 module.exports = clima_cercanias;
-},{"./direccion_viento":6}],4:[function(require,module,exports){
+},{"./direccion_viento":6}],5:[function(require,module,exports){
 var controller = {}
 
 controller.datos = {};
@@ -282,14 +309,32 @@ controller.set_background = function(){
 }
 
 controller.movimiento = function(){
+	var cantidad_movimiento = require('./cant_movimiento.js');//Depende del zoom, setea la cantidad que suma/resta
+	var cantidad;
 	$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
 	$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
 	$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
 	$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
-	$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
-	$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
-	$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
-	$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
+	$('#mapa-up').on('click', function(){
+		cantidad = cantidad_movimiento(map.getZoom());
+		map.panTo([map.getCenter().lat+cantidad,map.getCenter().lng]);
+	});
+	$('#mapa-down').mousedown(function(){
+		cantidad = cantidad_movimiento(map.getZoom());
+		map.panTo([map.getCenter().lat-cantidad,map.getCenter().lng]);
+	});
+	$('#mapa-left').mousedown(function(){
+		cantidad = cantidad_movimiento(map.getZoom());
+		map.panTo([map.getCenter().lat,map.getCenter().lng-cantidad]);
+	});
+	$('#mapa-right').mousedown(function(){
+		cantidad = cantidad_movimiento(map.getZoom());
+		map.panTo([map.getCenter().lat,map.getCenter().lng+cantidad]);
+	});
+}
+
+controller.get_estadisticas = function(){
+	//http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start={start}&cnt=8
 } 
 
 controller.controller = function(){
@@ -382,7 +427,7 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
 					controller.set_background();
-					generarMapa(controller.datos.latitud, controller.datos.longitud, 16, 3);
+					generarMapa(controller.datos.latitud, controller.datos.longitud, 10, 3);
 					controller.movimiento();
 					$(this).effect('fade', 1000, function(){ 
 						estado_vistas = false;			
@@ -413,40 +458,7 @@ controller.controller = function(){
 }
 
 module.exports = controller;
-},{"./cambiarDia.js":2,"./clima_cercanias.js":3,"./generarMapa.js":7,"./organizarDias.js":9,"./primerDia.js":10,"./setCercanos.js":11,"./setearVerMas.js":12}],5:[function(require,module,exports){
-
-
-var diaSemana = function diaSemana(day){
-
-	var fecha = new Date(day*1000);
-	var cadena = fecha.getDate()+'/'+fecha.getMonth();
-	var dia; 
- 	
-	console.log(cadena);
-	console.log(fecha.getDay());
-	switch(fecha.getDay()){
-		case 0: dia = 'dia_7';
-			break;
-		case 1: dia = 'dia_1';
-			break;
-		case 2: dia = 'dia_2';
-			break;
-		case 3: dia = 'dia_3';
-			break;
-		case 4: dia = 'dia_4';
-			break;
-		case 5: dia = 'dia_5';
-			break;
-		case 6: dia = 'dia_6';
-			break;
-	}
-	return dia;
-}
-
-
-
-module.exports = diaSemana;
-},{}],6:[function(require,module,exports){
+},{"./cambiarDia.js":2,"./cant_movimiento.js":3,"./clima_cercanias.js":4,"./generarMapa.js":7,"./organizarDias.js":9,"./primerDia.js":10,"./setCercanos.js":11,"./setearVerMas.js":12}],6:[function(require,module,exports){
 
 var direccion_viento = function direccion_viento(dia_viento){
 	var grados = dia_viento.deg;

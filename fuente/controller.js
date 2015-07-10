@@ -141,14 +141,32 @@ controller.set_background = function(){
 }
 
 controller.movimiento = function(){
+	var cantidad_movimiento = require('./cant_movimiento.js');//Depende del zoom, setea la cantidad que suma/resta
+	var cantidad;
 	$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
 	$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
 	$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
 	$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
-	$('#mapa-up').on('click', function(){map.panTo([map.getCenter().lat+5,map.getCenter().lng]);});
-	$('#mapa-down').mousedown(function(){map.panTo([map.getCenter().lat-5,map.getCenter().lng]);});
-	$('#mapa-left').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng-5]);});
-	$('#mapa-right').mousedown(function(){map.panTo([map.getCenter().lat,map.getCenter().lng+5]);});
+	$('#mapa-up').on('click', function(){
+		cantidad = cantidad_movimiento(map.getZoom());
+		map.panTo([map.getCenter().lat+cantidad,map.getCenter().lng]);
+	});
+	$('#mapa-down').mousedown(function(){
+		cantidad = cantidad_movimiento(map.getZoom());
+		map.panTo([map.getCenter().lat-cantidad,map.getCenter().lng]);
+	});
+	$('#mapa-left').mousedown(function(){
+		cantidad = cantidad_movimiento(map.getZoom());
+		map.panTo([map.getCenter().lat,map.getCenter().lng-cantidad]);
+	});
+	$('#mapa-right').mousedown(function(){
+		cantidad = cantidad_movimiento(map.getZoom());
+		map.panTo([map.getCenter().lat,map.getCenter().lng+cantidad]);
+	});
+}
+
+controller.get_estadisticas = function(){
+	//http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start={start}&cnt=8
 } 
 
 controller.controller = function(){
@@ -241,7 +259,7 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
 					controller.set_background();
-					generarMapa(controller.datos.latitud, controller.datos.longitud, 16, 3);
+					generarMapa(controller.datos.latitud, controller.datos.longitud, 10, 3);
 					controller.movimiento();
 					$(this).effect('fade', 1000, function(){ 
 						estado_vistas = false;			
