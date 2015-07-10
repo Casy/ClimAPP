@@ -3,7 +3,7 @@ var direccion_viento = require('./direccion_viento.js');
 var setearVerMas = function setearVerMas(clima_semana){
 	var dias_completos = ['DOMINGO','LUNES','MARTES','MIERCOLES','JUEVES','VIERNES','SABADO'];
 	var fecha;
-	var i;;
+	var i;
 
 
 	for(i=0; i < 4; i++){
@@ -11,6 +11,7 @@ var setearVerMas = function setearVerMas(clima_semana){
 		fecha = dias_completos[fecha.getDay()]+' '+fecha.getDate()+'/'+(fecha.getMonth()+1);
 		$('#dia_'+(i+1)+'_completo').html(fecha);
 		$('#icono_dia_'+(i+1)).attr('src', 'img/ICONS/'+clima_semana[i].weather[0].icon+'.png');
+		$('#probabilidad_lluvia_dia_'+(i+1)).html(clima_semana[i].humidity+'%');
 		$('#grados_dia_'+(i+1)).html(parseInt(clima_semana[i].temp.day, 10));
 		$('#tipo_dia_'+(i+1)).html(clima_semana[i].weather[0].description);
 		$('#maxima_dia_'+(i+1)).html(parseInt(clima_semana[i].temp.max,10));
