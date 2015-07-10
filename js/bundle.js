@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	}
 
 });
-},{"./controller":5,"./leaflet-openweathermap":8,"jquery":14,"jquery-ui":13,"leaflet":15}],2:[function(require,module,exports){
+},{"./controller":5,"./leaflet-openweathermap":9,"jquery":15,"jquery-ui":14,"leaflet":16}],2:[function(require,module,exports){
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -165,7 +165,7 @@ function velocidad_viento(dia){
 }
 
 module.exports = clima_cercanias;
-},{"./direccion_viento":6}],5:[function(require,module,exports){
+},{"./direccion_viento":7}],5:[function(require,module,exports){
 var controller = {}
 
 controller.datos = {};
@@ -312,7 +312,7 @@ controller.set_background = function(){
 controller.movimiento = function(){
 	var cantidad_movimiento = require('./cant_movimiento.js');//Depende del zoom, setea la cantidad que suma/resta
 	var cantidad;
-	$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
+	$('#grados_dia_actual').html(parseInt(controller.datos.clima_completo.list[0].temp.day,10));
 	$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
 	$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
 	$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
@@ -475,7 +475,40 @@ controller.controller = function(){
 }
 
 module.exports = controller;
-},{"./cambiarDia.js":2,"./cant_movimiento.js":3,"./clima_cercanias.js":4,"./generarMapa.js":7,"./organizarDias.js":9,"./primerDia.js":10,"./setCercanos.js":11,"./setearVerMas.js":12}],6:[function(require,module,exports){
+},{"./cambiarDia.js":2,"./cant_movimiento.js":3,"./clima_cercanias.js":4,"./generarMapa.js":8,"./organizarDias.js":10,"./primerDia.js":11,"./setCercanos.js":12,"./setearVerMas.js":13}],6:[function(require,module,exports){
+
+
+var diaSemana = function diaSemana(day){
+
+	var fecha = new Date(day*1000);
+	var cadena = fecha.getDate()+'/'+fecha.getMonth();
+	var dia; 
+ 	
+	console.log(cadena);
+	console.log(fecha.getDay());
+	switch(fecha.getDay()){
+		case 0: dia = 'dia_7';
+			break;
+		case 1: dia = 'dia_1';
+			break;
+		case 2: dia = 'dia_2';
+			break;
+		case 3: dia = 'dia_3';
+			break;
+		case 4: dia = 'dia_4';
+			break;
+		case 5: dia = 'dia_5';
+			break;
+		case 6: dia = 'dia_6';
+			break;
+	}
+	return dia;
+}
+
+
+
+module.exports = diaSemana;
+},{}],7:[function(require,module,exports){
 
 var direccion_viento = function direccion_viento(dia_viento){
 	var grados = dia_viento.deg;
@@ -503,7 +536,7 @@ var direccion_viento = function direccion_viento(dia_viento){
 }
 
 module.exports = direccion_viento;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
 
 var generarMapa = function mapa(latitud, longitud, zoomMax,zoomMin){
@@ -520,7 +553,7 @@ var generarMapa = function mapa(latitud, longitud, zoomMax,zoomMin){
 };
 
 module.exports = generarMapa;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * A JavaScript library for using OpenWeatherMap's layers and OWM's city/station data for leaflet based maps without hassle.
  * License: CC0 (Creative Commons Zero), see http://creativecommons.org/publicdomain/zero/1.0/
@@ -1722,7 +1755,7 @@ L.OWM.Utils = {
 	}
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 
 var organizarDias = function organizarDias(dia){
@@ -1746,7 +1779,7 @@ var organizarDias = function organizarDias(dia){
 
 
 module.exports = organizarDias;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var organizarDias = require('./organizarDias.js');
 
 var primerDia = function(diaActual){
@@ -1761,7 +1794,7 @@ var primerDia = function(diaActual){
 
 
 module.exports = primerDia;
-},{"./organizarDias.js":9}],11:[function(require,module,exports){
+},{"./organizarDias.js":10}],12:[function(require,module,exports){
 
 
 var setCercanos = function setCercanos(datos){
@@ -1785,7 +1818,7 @@ var setCercanos = function setCercanos(datos){
 
 
 module.exports = setCercanos;
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var direccion_viento = require('./direccion_viento.js');
 
 var setearVerMas = function setearVerMas(clima_semana){
@@ -1819,7 +1852,7 @@ function velocidad_viento(dia){
 
 
 module.exports = setearVerMas;
-},{"./direccion_viento.js":6}],13:[function(require,module,exports){
+},{"./direccion_viento.js":7}],14:[function(require,module,exports){
 var jQuery = require('jquery');
 
 /*! jQuery UI - v1.10.3 - 2013-05-03
@@ -16826,7 +16859,7 @@ $.widget( "ui.tooltip", {
 
 }( jQuery ) );
 
-},{"jquery":14}],14:[function(require,module,exports){
+},{"jquery":15}],15:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -26038,7 +26071,7 @@ return jQuery;
 
 }));
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*
  Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
  (c) 2010-2013, Vladimir Agafonkin
@@ -35219,4 +35252,4 @@ L.Map.include({
 
 
 }(window, document));
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12]);
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13]);

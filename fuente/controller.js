@@ -144,7 +144,7 @@ controller.set_background = function(){
 controller.movimiento = function(){
 	var cantidad_movimiento = require('./cant_movimiento.js');//Depende del zoom, setea la cantidad que suma/resta
 	var cantidad;
-	$('#grados_dia_actual').html(controller.datos.clima_completo.list[0].temp.day);
+	$('#grados_dia_actual').html(parseInt(controller.datos.clima_completo.list[0].temp.day,10));
 	$('#ciudad_ahora').html(controller.datos.clima_completo.city.name);
 	$('#mapa-zoom-mas').on('click', function(){map.zoomIn();});
 	$('#mapa-zoom-menos').on('click', function(){map.zoomOut();});
