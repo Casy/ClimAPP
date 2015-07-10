@@ -10,7 +10,7 @@ var setearVerMas = function setearVerMas(clima_semana){
 		fecha = new Date(clima_semana[i].dt*1000);
 		fecha = dias_completos[fecha.getDay()]+' '+fecha.getDate()+'/'+(fecha.getMonth()+1);
 		$('#dia_'+(i+1)+'_completo').html(fecha);
-		$('#icono_dia_'+(i+1)).attr('src', 'http://openweathermap.org/img/w/'+clima_semana[i].weather[0].icon+'.png');
+		$('#icono_dia_'+(i+1)).attr('src', 'img/ICONS/'+clima_semana[i].weather[0].icon+'.png');
 		$('#grados_dia_'+(i+1)).html(parseInt(clima_semana[i].temp.day, 10));
 		$('#tipo_dia_'+(i+1)).html(clima_semana[i].weather[0].description);
 		$('#maxima_dia_'+(i+1)).html(parseInt(clima_semana[i].temp.max,10));

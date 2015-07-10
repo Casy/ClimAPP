@@ -8,8 +8,7 @@ controller.iniciar = function(){
 	$("header").fadeIn();
 	$("footer").fadeIn();
 	controller.hay_tormenta();
-	controller.ciudades_cercanas();
-	//controller.get_estadisticas();
+	controller.ciudades_cercanas_estadisticas();
 }
 
 controller.get_clima_iniciar = function(posicion){
@@ -32,7 +31,7 @@ controller.get_clima_iniciar = function(posicion){
 	});
 }
 
-controller.ciudades_cercanas = function(){
+controller.ciudades_cercanas_estadisticas = function(){
 	//http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=3
 	$.ajax({ 
 		type: "GET",

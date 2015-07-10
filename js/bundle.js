@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	}
 
 });
-},{"./controller":5,"./leaflet-openweathermap":8,"jquery":14,"jquery-ui":13,"leaflet":15}],2:[function(require,module,exports){
+},{"./controller":5,"./leaflet-openweathermap":9,"jquery":15,"jquery-ui":14,"leaflet":16}],2:[function(require,module,exports){
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -53,7 +53,7 @@ var cambiarDia = function cambiarDia(contenido,id){
 	}
 
 	$('#clima_icon').effect("fade", 500, function(){
-		$(this).attr('src', 'http://openweathermap.org/img/w/'+vars[auxiliar].weather[0].icon+'.png');
+		$(this).attr('src', 'img/ICONS/'+vars[auxiliar].weather[0].icon+'.png');
 	}).effect("fade", 500);
 	$('#grados_dia_seleccionado' ).effect("fade", 500, function(){
 		$(this).html( parseInt(vars[auxiliar].temp.day,10));
@@ -145,7 +145,7 @@ var clima_cercanias = function clima_cercanias(ciudades){
 
 	for(i=0; i < 4; i++){
 		$('#dia_'+(i+1)+'_completo').html(ciudades[i].name);
-		$('#icono_dia_'+(i+1)).attr('src', 'http://openweathermap.org/img/w/'+ciudades[i].weather[0].icon+'.png');
+		$('#icono_dia_'+(i+1)).attr('src', 'img/ICONS/'+ciudades[i].weather[0].icon+'.png');
 		$('#grados_dia_'+(i+1)).html(parseInt(ciudades[i].main.temp,10));
 		$('#tipo_dia_'+(i+1)).html(ciudades[i].weather[0].description);
 		$('#maxima_dia_'+(i+1)).html(parseInt(ciudades[i].main.temp_max,10));
@@ -165,7 +165,7 @@ function velocidad_viento(dia){
 }
 
 module.exports = clima_cercanias;
-},{"./direccion_viento":6}],5:[function(require,module,exports){
+},{"./direccion_viento":7}],5:[function(require,module,exports){
 var controller = {}
 
 controller.datos = {};
@@ -176,8 +176,7 @@ controller.iniciar = function(){
 	$("header").fadeIn();
 	$("footer").fadeIn();
 	controller.hay_tormenta();
-	controller.ciudades_cercanas();
-	//controller.get_estadisticas();
+	controller.ciudades_cercanas_estadisticas();
 }
 
 controller.get_clima_iniciar = function(posicion){
@@ -200,7 +199,7 @@ controller.get_clima_iniciar = function(posicion){
 	});
 }
 
-controller.ciudades_cercanas = function(){
+controller.ciudades_cercanas_estadisticas = function(){
 	//http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=3
 	$.ajax({ 
 		type: "GET",
@@ -475,7 +474,40 @@ controller.controller = function(){
 }
 
 module.exports = controller;
-},{"./cambiarDia.js":2,"./cant_movimiento.js":3,"./clima_cercanias.js":4,"./generarMapa.js":7,"./organizarDias.js":9,"./primerDia.js":10,"./setCercanos.js":11,"./setearVerMas.js":12}],6:[function(require,module,exports){
+},{"./cambiarDia.js":2,"./cant_movimiento.js":3,"./clima_cercanias.js":4,"./generarMapa.js":8,"./organizarDias.js":10,"./primerDia.js":11,"./setCercanos.js":12,"./setearVerMas.js":13}],6:[function(require,module,exports){
+
+
+var diaSemana = function diaSemana(day){
+
+	var fecha = new Date(day*1000);
+	var cadena = fecha.getDate()+'/'+fecha.getMonth();
+	var dia; 
+ 	
+	console.log(cadena);
+	console.log(fecha.getDay());
+	switch(fecha.getDay()){
+		case 0: dia = 'dia_7';
+			break;
+		case 1: dia = 'dia_1';
+			break;
+		case 2: dia = 'dia_2';
+			break;
+		case 3: dia = 'dia_3';
+			break;
+		case 4: dia = 'dia_4';
+			break;
+		case 5: dia = 'dia_5';
+			break;
+		case 6: dia = 'dia_6';
+			break;
+	}
+	return dia;
+}
+
+
+
+module.exports = diaSemana;
+},{}],7:[function(require,module,exports){
 
 var direccion_viento = function direccion_viento(dia_viento){
 	var grados = dia_viento.deg;
@@ -503,7 +535,7 @@ var direccion_viento = function direccion_viento(dia_viento){
 }
 
 module.exports = direccion_viento;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
 
 var generarMapa = function mapa(latitud, longitud, zoomMax,zoomMin){
@@ -520,7 +552,7 @@ var generarMapa = function mapa(latitud, longitud, zoomMax,zoomMin){
 };
 
 module.exports = generarMapa;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * A JavaScript library for using OpenWeatherMap's layers and OWM's city/station data for leaflet based maps without hassle.
  * License: CC0 (Creative Commons Zero), see http://creativecommons.org/publicdomain/zero/1.0/
@@ -763,7 +795,7 @@ L.OWM.Current = L.Class.extend({
 		showTempMinMax: true, // available: true, false
 		useLocalTime: true, // available: true, false
 		clusterSize: 150,
-		imageUrlCity: 'http://openweathermap.org/img/w/{icon}.png',
+		imageUrlCity: 'img/ICONS/{icon}.png',
 		imageWidth: 50,
 		imageHeight: 50,
 		imageUrlStation: 'http://openweathermap.org/img/s/istation.png',
@@ -797,7 +829,7 @@ L.OWM.Current = L.Class.extend({
 			if (this.options.imageLoadingBgUrl) {
 				bgIcon = this.options.imageLoadingBgUrl;
 			} else {
-				bgIcon = this.options.imageUrlCity.replace('{icon}', '10d');
+				//bgIcon = this.options.imageUrlCity.replace('{icon}', '10d');
 				if (this.options.type != 'city') {
 					var bgIcon = this.options.imageUrlStation;
 				}
@@ -1722,7 +1754,7 @@ L.OWM.Utils = {
 	}
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 
 var organizarDias = function organizarDias(dia){
@@ -1746,12 +1778,12 @@ var organizarDias = function organizarDias(dia){
 
 
 module.exports = organizarDias;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var organizarDias = require('./organizarDias.js');
 
 var primerDia = function(diaActual){
 
-			$('#clima_icon').attr('src', 'http://openweathermap.org/img/w/'+diaActual.weather[0].icon+'.png');
+			$('#clima_icon').attr('src', 'img/ICONS/'+diaActual.weather[0].icon+'.png');
 			$('#grados_dia_seleccionado' ).html( parseInt(diaActual.temp.day,10) );
 			$('#tipo_dia_seleccionado').html( diaActual.weather[0].description );
 			$('#maxima_dia_seleccionado').html( parseInt(diaActual.temp.max,10) );
@@ -1761,14 +1793,14 @@ var primerDia = function(diaActual){
 
 
 module.exports = primerDia;
-},{"./organizarDias.js":9}],11:[function(require,module,exports){
+},{"./organizarDias.js":10}],12:[function(require,module,exports){
 
 
 var setCercanos = function setCercanos(datos){
 
 	//CIUDAD CENTRO
 	$('#ciudad_ahora').html('AHORA - '+datos.clima_completo.city.name);
-	$('#icono_dia_actual').attr('src','http://openweathermap.org/img/w/'+datos.clima_completo.list[0].weather[0].icon+'.png');
+	$('#icono_dia_actual').attr('src','img/ICONS/'+datos.clima_completo.list[0].weather[0].icon+'.png');
 	$('#grados_dia_actual').html(parseInt(datos.clima_completo.list[0].temp.day,10));
 	$('#tipo_dia_1').html(datos.clima_completo.list[0].weather[0].description);
 	$('#maxima_dia_1').html(parseInt(datos.clima_completo.list[0].temp.max,10));
@@ -1777,7 +1809,7 @@ var setCercanos = function setCercanos(datos){
 
 	for(i=0; i <2; i++){
 		$('#localidad_cercania_'+(i+1)).html(datos.ciudades_cercanas.list[i].name);
-		$('#img_cercania_'+(i+1)).attr('src','http://openweathermap.org/img/w/'+datos.ciudades_cercanas.list[i].weather[0].icon+'.png');
+		$('#img_cercania_'+(i+1)).attr('src','img/ICONS/'+datos.ciudades_cercanas.list[i].weather[0].icon+'.png');
 		$('#temperatura_cercania_'+(i+1)).html(parseInt(datos.ciudades_cercanas.list[0].main.temp,10));	
 	}
 }
@@ -1785,7 +1817,7 @@ var setCercanos = function setCercanos(datos){
 
 
 module.exports = setCercanos;
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var direccion_viento = require('./direccion_viento.js');
 
 var setearVerMas = function setearVerMas(clima_semana){
@@ -1798,7 +1830,7 @@ var setearVerMas = function setearVerMas(clima_semana){
 		fecha = new Date(clima_semana[i].dt*1000);
 		fecha = dias_completos[fecha.getDay()]+' '+fecha.getDate()+'/'+(fecha.getMonth()+1);
 		$('#dia_'+(i+1)+'_completo').html(fecha);
-		$('#icono_dia_'+(i+1)).attr('src', 'http://openweathermap.org/img/w/'+clima_semana[i].weather[0].icon+'.png');
+		$('#icono_dia_'+(i+1)).attr('src', 'img/ICONS/'+clima_semana[i].weather[0].icon+'.png');
 		$('#grados_dia_'+(i+1)).html(parseInt(clima_semana[i].temp.day, 10));
 		$('#tipo_dia_'+(i+1)).html(clima_semana[i].weather[0].description);
 		$('#maxima_dia_'+(i+1)).html(parseInt(clima_semana[i].temp.max,10));
@@ -1819,7 +1851,7 @@ function velocidad_viento(dia){
 
 
 module.exports = setearVerMas;
-},{"./direccion_viento.js":6}],13:[function(require,module,exports){
+},{"./direccion_viento.js":7}],14:[function(require,module,exports){
 var jQuery = require('jquery');
 
 /*! jQuery UI - v1.10.3 - 2013-05-03
@@ -16826,7 +16858,7 @@ $.widget( "ui.tooltip", {
 
 }( jQuery ) );
 
-},{"jquery":14}],14:[function(require,module,exports){
+},{"jquery":15}],15:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -26038,7 +26070,7 @@ return jQuery;
 
 }));
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*
  Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
  (c) 2010-2013, Vladimir Agafonkin
@@ -35219,4 +35251,4 @@ L.Map.include({
 
 
 }(window, document));
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12]);
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13]);

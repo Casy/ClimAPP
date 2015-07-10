@@ -11,8 +11,11 @@ header{
 	background-color: #0076bf;
 	height: 92px;
 }
+
 content{
-	width:100%;
+	background-color: rgba(0,0,0,0.5);
+	float: left;
+	width: 100%;
 }
 
 header img{
@@ -122,11 +125,14 @@ header img{
 }
 
 #container_clima{
-	background-color: rgba(0,0,0,0.4);
 	background-repeat: no-repeat;
 	background-position: center center;
 	z-index: 1;
 	padding-top: 30px;
+}
+
+.padding-t-10{
+	padding-top: 10px;
 }
 
 .padding-t-20{
@@ -268,15 +274,15 @@ header img{
 }
 
 #icono_dia_actual{
-	padding-top: 35px;
+	padding-top: 5px;
 }
 
 .mapa-cercania{
-	text-align: right;
+	text-align: center;
 }
 
 .mapa-cercania p{
-	text-align: left;
+	text-align: center;
 }
 
 .border-b{
@@ -302,8 +308,8 @@ h2{
 }
 
 .img-cercania img{
-	padding-top: 20px;
-	max-width: 25px;
+	padding-top: 10px;
+	max-width: 60px;
 }
 
 #mapa_container{
@@ -335,7 +341,7 @@ footer{
 #clima_icon{
 	min-width: 80px;
 	min-height: 80px;
-	margin-bottom: -20px;
+	margin-top: 20px;
 }
 
 #tipo_dia_seleccionado{
@@ -349,4 +355,14 @@ footer{
 
 #dia_anterior{
 	display: none;
+}
+
+.leaflet-container img {
+	width: 100%;
+	height: 100%;
+}
+
+.owm-icondiv{
+	padding: 5px;
+	width: 60px;
 }

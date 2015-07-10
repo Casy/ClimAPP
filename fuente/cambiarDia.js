@@ -21,7 +21,7 @@ var cambiarDia = function cambiarDia(contenido,id){
 	}
 
 	$('#clima_icon').effect("fade", 500, function(){
-		$(this).attr('src', 'http://openweathermap.org/img/w/'+vars[auxiliar].weather[0].icon+'.png');
+		$(this).attr('src', 'img/ICONS/'+vars[auxiliar].weather[0].icon+'.png');
 	}).effect("fade", 500);
 	$('#grados_dia_seleccionado' ).effect("fade", 500, function(){
 		$(this).html( parseInt(vars[auxiliar].temp.day,10));

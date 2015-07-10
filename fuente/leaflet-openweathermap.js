@@ -240,7 +240,7 @@ L.OWM.Current = L.Class.extend({
 		showTempMinMax: true, // available: true, false
 		useLocalTime: true, // available: true, false
 		clusterSize: 150,
-		imageUrlCity: 'http://openweathermap.org/img/w/{icon}.png',
+		imageUrlCity: 'img/ICONS/{icon}.png',
 		imageWidth: 50,
 		imageHeight: 50,
 		imageUrlStation: 'http://openweathermap.org/img/s/istation.png',
@@ -274,7 +274,7 @@ L.OWM.Current = L.Class.extend({
 			if (this.options.imageLoadingBgUrl) {
 				bgIcon = this.options.imageLoadingBgUrl;
 			} else {
-				bgIcon = this.options.imageUrlCity.replace('{icon}', '10d');
+				//bgIcon = this.options.imageUrlCity.replace('{icon}', '10d');
 				if (this.options.type != 'city') {
 					var bgIcon = this.options.imageUrlStation;
 				}
