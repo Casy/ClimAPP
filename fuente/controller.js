@@ -173,7 +173,7 @@ controller.get_estadisticas = function(){
 	console.log(horasAtras);
 	$.ajax({ 
 		type: "GET",
-		url: 'http://api.openweathermap.org/data/2.5/history/city?lat='+controller.datos.latitud+'&lon='+controller.datos.longitud+'&type=hour&start='+horasAtras+'&cnt=5&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: 'http://api.openweathermap.org/data/2.5/history/city?lat='+controller.datos.latitud+'&lon='+controller.datos.longitud+'&type=hour&start='+{start}+'&cnt=5&APPID=c44a164d60b023ea3f628c7677c0d6b0',
 		dataType: "json",
 		success: function (data) {
 			console.log("Estadisticas -> READY");
@@ -239,11 +239,11 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
 					controller.set_background();
-					generarMapa(controller.datos.latitud, controller.datos.longitud, 9, 9);///GENERADOR DEL MAPA
-					setCercanos(controller.datos); //Dos ciudades cercanas EN EL MAPA
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
+					generarMapa(controller.datos.latitud, controller.datos.longitud, 9, 9);///GENERADOR DEL MAPA
+					setCercanos(controller.datos); //Dos ciudades cercanas EN EL MAPA
 				});
 				
 			});
@@ -257,7 +257,6 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_cercanias.html', function(){
 					controller.set_background();
-					// Accion
 					clima_cercanias(controller.datos.ciudades_cercanas); //Setea las 4 ciudades cercanas
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
@@ -276,11 +275,11 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
 					controller.set_background();
-					generarMapa(controller.datos.latitud, controller.datos.longitud, 10, 3);
-					controller.movimiento();
 					$(this).effect('fade', 1000, function(){ 
 						estado_vistas = false;			
 					})
+					generarMapa(controller.datos.latitud, controller.datos.longitud, 10, 3);
+					controller.movimiento();
 				});
 				
 			});
