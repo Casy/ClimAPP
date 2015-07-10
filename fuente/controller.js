@@ -193,6 +193,7 @@ controller.controller = function(){
 	var primerDia = require('./primerDia.js');
 	var setCercanos = require('./setCercanos.js');
 	var clima_cercanias = require('./clima_cercanias.js');
+	var graficar = require('./graficar_estadisticas.js');
 
 	$("#clima_actual").on("click", function(){
 		if(vista_actual != 'clima_actual' && estado_vistas != true){
@@ -294,10 +295,10 @@ controller.controller = function(){
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/estadisticas.html', function(){
 					controller.set_background();
-					// Accion
 					$(this).effect('fade', 1000, function(){
 						estado_vistas = false;			
 					})
+					graficar(controller.datos);//GRAFICOS
 				});
 			});
 		}
