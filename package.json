@@ -10,6 +10,7 @@
     "jquery-ui": "^1.10.5"
   },
   "devDependencies": {
+    "chart.js": "^1.0.2",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.8.0",
     "grunt-contrib-watch": "^0.6.1",
