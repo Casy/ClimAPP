@@ -1921,12 +1921,12 @@ var setCercanos = function setCercanos(datos){
 	/////////////////////
 
 	for(i=1; i <=2; i++){
-		$('#localidad_cercania_'+(i+1)).html(datos.ciudades_cercanas.list[i].name);
-		$('#img_cercania_'+(i+1)).attr('src','img/ICONS/'+datos.ciudades_cercanas.list[i].weather[0].icon+'.png');
-		$('#temperatura_cercania_'+(i+1)).html(parseInt(datos.ciudades_cercanas.list[0].main.temp,10));	
+		$('#localidad_cercania_'+i).html(datos.ciudades_cercanas.list[i].name);
+		$('#img_cercania_'+i).attr('src','img/ICONS/'+datos.ciudades_cercanas.list[i].weather[0].icon+'.png');
+		$('#temperatura_cercania_'+i).html(parseInt(datos.ciudades_cercanas.list[0].main.temp,10));	
 	}
 }
- 
+
 
 
 module.exports = setCercanos;
