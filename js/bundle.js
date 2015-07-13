@@ -626,13 +626,13 @@ var graficar = function(datos){
 
 
 	var ctx = $("#grados_horas").get(0).getContext("2d");
-	new Chart(ctx).Line(data,{bezierCurve: false, scaleBeginAtZero: true});
+	new Chart(ctx).Line(data,{bezierCurve: false, scaleBeginAtZero: true, scaleFontColor: "#fff"});
 	ctx = $("#presion_horas").get(0).getContext("2d");
-	new Chart(ctx).Line(presion,{scaleBeginAtZero: true});
+	new Chart(ctx).Line(presion,{scaleBeginAtZero: true, scaleFontColor: "#fff"});
 	ctx = $("#humedad_horas").get(0).getContext("2d");
-	new Chart(ctx).Bar(humedad,{scaleBeginAtZero: true});
+	new Chart(ctx).Bar(humedad,{scaleBeginAtZero: true, scaleFontColor: "#fff"});
 	ctx = $("#grados_semana").get(0).getContext("2d");
-	new Chart(ctx).Bar(grados_semanal,{scaleBeginAtZero: true});
+	new Chart(ctx).Bar(grados_semanal,{scaleBeginAtZero: true, scaleFontColor: "#fff"});
 
 
 	var temperatura= 0, maxima=0,minima=0;

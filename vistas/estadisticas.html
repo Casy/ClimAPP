@@ -1,73 +1,58 @@
 <div class="col-md-12">
 	
 	<div class="row">
+		<h3>Estadisticas (5hs previas)</h3>
 		<div class="col-md-4">
-			<h2>Grados</h2>
-			<canvas id="grados_horas" width="300" height="200"></canvas>
+			<h3>Grados</h3>
+			<canvas id="grados_horas" width="400" height="150"></canvas>
 
-			</div>
+		</div>
+		
+
+		<div class="col-md-4">
+			<h3>Humedad</h3>
+			<canvas id="humedad_horas" width="400" height="150"></canvas>
+
 		</div>
 
 		<div class="col-md-4">
-			<h2>Humedad</h2>
-			<canvas id="humedad_horas" width="300" height="200"></canvas>
+			<h3>Presion atmosferica</h3>
+			<canvas id="presion_horas" width="400" height="150"></canvas>
 
-			</div>
-		</div>
-
-		<div class="col-md-4">
-			<h2>Presion atmosferica</h2>
-			<canvas id="presion_horas" width="300" height="200"></canvas>
-
-			</div>
 		</div>
 	</div>
+</div>
 
 
-	<div class="row padding-top-20">
-		<div class="col-md-6">
-			<h2>Viento</h2>
-			<div id="chart_viento">
+<div class="row padding-top-20">
+	<div class="col-md-4">
+		<h4>Grados durante la semana</h4>
+		<canvas id="grados_semana" width="300" height="150"></canvas>
 
-			</div>
-		</div>
-
-		<div class="col-md-6">
-			<h2>Porcentaje de nubes</h2>
-			<div id="chart_nuves">
-
-			</div>
-		</div>
 	</div>
+	<div class="col-md-8">
+		<div class="row">
+		<h3>Promedio semanal</h3>
+		<div class="col-md-2 col-md-offset-3">
+				<h4>Grados</h4>
+				<p class="font-90"><span id="prom_grados_semanal">
 
-	<div class="row padding-top-20">
-		<div class="col-md-4">
-			<h2>Grados durante la semana</h4>
-			<canvas id="grados_semana" width="200" height="200"></canvas>
+				</span>&deg;</p>
+			</div>
 
+			<div class="col-md-2">
+				<h4>Minima</h4>
+				<p class="font-90"><span id="prom_minima_semanal">
+
+				</span>&deg;</p>
+			</div>
+
+			<div class="col-md-2">
+				<h4>Maxima</h4>
+				<p class="font-90"><span id="prom_maxima_semanal">
+
+				</span>&deg;</p>
 			</div>
 		</div>
-
-		<div class="col-md-2 col-md-offset-1">
-			<h4>Promedio de grados semanal</h4>
-			<div id="prom_grados_semanal">
-
-			</div>
-		</div>
-
-		<div class="col-md-2">
-			<h4>Promedio de minima semanal</h4>
-			<div id="prom_minima_semanal">
-
-			</div>
-		</div>
-
-		<div class="col-md-2">
-			<h4>Promedio de maxima semanal</h4>
-			<div id="prom_maxima_semanal">
-
-			</div>
-		</div>
-
 	</div>
 </div>
