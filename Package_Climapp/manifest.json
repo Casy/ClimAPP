@@ -1,0 +1,23 @@
+{
+    "vendor": "Bootweb",
+    "id": "ar.bw.apps.tac.ClimAPP",
+    "components": [
+        {
+            "type": "app",
+            "id": "ar.bw.apps.tac.ClimAPP",
+            "name": "ClimAPP",
+            "description": "ClimAPP es una aplicacion que informa el estado meteorologico de la zona en la cual te encuentras y tambien en sus alrededores, ademas incluye un mapa con el clima del todo el mundo.",
+            "version": "0.0.1",
+            "main": "http://tiendatac.minplan.gob.ar/climapp",
+            "icon": "icon.png",
+            "categories": ["Clima", "Informacion"],
+            "dependencies": [
+                "ar.edu.unlp.info.lifia.tvd.system"
+            ]
+        }
+    ],
+    "vendor-url": "http://www.bootweb.com.ar/",
+    "version": "0.0.1",
+    "platform": "all",
+    "api-level": "1.0"
+}

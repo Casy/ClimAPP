@@ -1,0 +1,372 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style media="all">/************** BASE CSS **************/
+html, body { margin: 0; padding: 0; }
+body { margin: 0 auto 2rem; padding: 0 2.5rem; max-width: 600px; font-family: Helvetica Neue; font-size: 10.0pt; font-weight: 400; }
+
+h1 { margin-bottom: 0.6rem; font-size: 2rem; }
+h2 { margin: 1.5rem 0 1rem; font-size: 1.5rem; }
+h3 { margin: 1.3rem 0 1rem; font-size: 1.2rem; }
+h4, h5, h6 { font-size: 1rem; }
+
+hr { margin: 2em 0; border: none; height: 3px; }
+
+img { max-width: 100%; }
+p { padding-top: 0.3rem; line-height: 1.5rem; font-size: 0.9rem; }
+
+.img-sandbox-error { padding: 20px 10px; border: solid 1px #ddd; }
+    .img-sandbox-error h2 { margin: 0; text-align: center; font-size: 16px; }
+    .img-sandbox-error p { margin: 0; padding-top: 15px; text-align: center; font-size: 12px; }
+
+table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+    thead th { text-align: left; }
+        thead th[align="center"] { text-align: center; }
+        thead th[align="right"] { text-align: right; }
+    tr { margin: 0; padding: 0; }
+    th, td { margin: 0; padding: .75rem; }
+
+ul, ol { margin: 0; padding: 0 0 0 3rem; }
+  ul ul, ol ol { padding: 0.5rem 0 0.5rem 2rem; }
+ul { list-style-type: disc; }
+  li { padding: 0.15rem 0; font-size: 0.9rem; line-height: 1.4rem; }
+    .checkitem { position: relative; list-style: none; }
+    li p:first-child { margin: 0; padding: 0; }
+
+.checkitem input[type=checkbox] { -webkit-appearance: button; position: absolute; top: 4epx; left: -22px; width: 0.8rem; height: 0.8rem; border: solid 1px #000; border-radius: 2px; }
+
+code { padding: 0 3px; }
+pre { padding-top: 0.3rem; }
+pre code { display: block; padding: 7px; overflow: auto; line-height: 1.4rem; }
+
+blockquote { margin: 1rem 0 1rem 2rem; padding: 0 1rem; }
+    blockquote p { margin: 0; padding-bottom: 1rem; }
+    blockquote p:last-child { padding-bottom: 0.3rem; }
+
+.footnotes { font-size: .9rem; }
+sup a { padding-left: 1px; }
+    .footnotes a, sup a { text-decoration: none; }
+
+.erato-range, .erato-range a { display: inline; margin: 0 !important; padding: 0 !important; width: 0; height: 0; }
+
+/* -----------------------------------------------------------------------------
+   github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+----------------------------------------------------------------------------- */
+
+.hljs {
+  display: block; padding: 0.5rem;
+  color: #333;
+}
+
+.hljs-comment,
+.hljs-template_comment,
+.diff .hljs-header,
+.hljs-javadoc {
+  color: #998;
+  font-style: italic
+}
+
+.hljs-keyword,
+.css .rule .hljs-keyword,
+.hljs-winutils,
+.javascript .hljs-title,
+.nginx .hljs-title,
+.hljs-subst,
+.hljs-request,
+.hljs-status {
+  color: #333;
+  font-weight: bold
+}
+
+.hljs-number,
+.hljs-hexcolor,
+.ruby .hljs-constant {
+  color: #099;
+}
+
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-phpdoc,
+.tex .hljs-formula {
+  color: #d14
+}
+
+.hljs-title,
+.hljs-id,
+.coffeescript .hljs-params,
+.scss .hljs-preprocessor {
+  color: #900;
+  font-weight: bold
+}
+
+.javascript .hljs-title,
+.lisp .hljs-title,
+.clojure .hljs-title,
+.hljs-subst {
+  font-weight: normal
+}
+
+.hljs-class .hljs-title,
+.haskell .hljs-type,
+.vhdl .hljs-literal,
+.tex .hljs-command {
+  color: #458;
+  font-weight: bold
+}
+
+.hljs-tag,
+.hljs-tag .hljs-title,
+.hljs-rules .hljs-property,
+.django .hljs-tag .hljs-keyword {
+  color: #000080;
+  font-weight: normal
+}
+
+.hljs-attribute,
+.hljs-variable,
+.lisp .hljs-body {
+  color: #008080
+}
+
+.hljs-regexp {
+  color: #009926
+}
+
+.hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.lisp .hljs-keyword,
+.tex .hljs-special,
+.hljs-prompt {
+  color: #990073
+}
+
+.hljs-built_in,
+.lisp .hljs-title,
+.clojure .hljs-built_in {
+  color: #0086b3
+}
+
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-pi,
+.hljs-doctype,
+.hljs-shebang,
+.hljs-cdata {
+  color: #999;
+  font-weight: bold
+}
+
+.hljs-deletion {
+  background: #fdd
+}
+
+.hljs-addition {
+  background: #dfd
+}
+
+.diff .hljs-change {
+  background: #0086b3
+}
+
+.hljs-chunk {
+  color: #aaa
+}
+
+/************** ERATO LIGHT CSS **************/
+body { color: #333; }
+
+hr { background: #eee; }
+a { color: #0060ff; }
+    a:hover { color: #0843a3; }
+
+thead th { background: #f8f8f8; }
+th, td { border: solid 1px #eee; }
+
+.checkitem input[type=checkbox] { border: solid 1px #ddd; background-color: #fff; }
+    .checkitem input[type=checkbox]:checked { background-color: #eee; }
+
+code { background: #f5f5f4; }
+blockquote { border-left: solid 6px #eee; }
+
+.footnotes { color: #999; }</style><script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script></head><body><div class="erato-range"><a data-range="0,34" name="0,34"></a></div><h1>Sitio del Desarrollador TAC-TV</h1>
+
+<div class="erato-range"><a data-range="34,250" name="34,250"></a></div><p>El sitio de desarrollador es una herramienta para el desarrollador de aplciaciones TAC-TV que permite al mismo administrar en forma ágil sus aplicaciones y ser asistido en el proceso de publicación de aplicaciones.</p>
+
+<div class="erato-range"><a data-range="250,417" name="250,417"></a></div><p>El siguiente documento describe el sitio de desarrollador TAC. Nos mostrará los conceptos generales y en particular el proceso de publicación de aplicaciones TAC-TV.</p>
+
+<div class="erato-range"><a data-range="417,452" name="417,452"></a></div><h2>Ingreso a TAC-TV Desarrollador</h2>
+
+<div class="erato-range"><a data-range="452,465" name="452,465"></a></div><h3>Ingreso</h3>
+
+<div class="erato-range"><a data-range="465,639" name="465,639"></a></div><p>Si el desarrollador ya tiene una cuenta de desarrollo debe ingresar con su <strong>usuario</strong> y <strong>clave</strong> esto le permitirá acceder al panel de administración de sus aplicaciones.</p>
+
+<div class="erato-range"><a data-range="639,667" name="639,667"></a></div><p><img src="images/login.png" alt="login"></p>
+
+<div class="erato-range"><a data-range="667,681" name="667,681"></a></div><h3>Registro</h3>
+
+<div class="erato-range"><a data-range="681,1001" name="681,1001"></a></div><p>Si aún no es un usuario desarrolador registrado en la pantalla de <em>Ingreso</em> debe seleccionar la opción <strong>Registrate</strong> abajo del ingreso de usuario y clave. El proceso de registración le pedira unos datos necesarios para el registro entre ellos un email válido dónde recibirá un mail con un link y código de activación.</p>
+
+<div class="erato-range"><a data-range="1001,1035" name="1001,1035"></a></div><p><img src="images/register.png" alt="register"></p>
+
+<div class="erato-range"><a data-range="1035,1122" name="1035,1122"></a></div><p>Si ya pose el código puede ingresar directamente el código para finalizar el proceso.</p>
+
+<div class="erato-range"><a data-range="1122,1166" name="1122,1166"></a></div><p><img src="images/register_code.png" alt="register_code"></p>
+
+<div class="erato-range"><a data-range="1166,1198" name="1166,1198"></a></div><h2>Publicación de Aplicaciones</h2>
+
+<div class="erato-range"><a data-range="1198,1624" name="1198,1624"></a></div><p>La publicación de aplicaciones, o nuevas versiones de las mismas, es un proceso paso a paso que asiste al desarrollador en dicha tarea. La tienda tiene distintos componentes que se muestran en base a la información ingresada en el proceso de publicación (screenshots, íconos, descripción, etc). Esta información es relevante para que el usuario TAC-TV encuentre atractiva la aplicación y entienda perfectamente su propósito.</p>
+
+<div class="erato-range"><a data-range="1624,1720" name="1624,1720"></a></div><p>A continuación se muestra los componentes principales de una aplicación en la <em>Tienda TAC-TV</em>.</p>
+
+<div class="erato-range"><a data-range="1720,1834" name="1720,1834"></a></div><p>Logos simple y dobles. El tamaño de los logos es arbitrario y seleccionado por la tienda al momento de ingresar.</p>
+
+<div class="erato-range"><a data-range="1834,1870" name="1834,1870"></a></div><p><img src="images/tienda-01.png" alt="tienda-01"></p>
+
+<div class="erato-range"><a data-range="1870,1894" name="1870,1894"></a></div><p>Detalle de aplicación.</p>
+
+<div class="erato-range"><a data-range="1894,1930" name="1894,1930"></a></div><p><img src="images/tienda-02.png" alt="tienda-02"></p>
+
+<div class="erato-range"><a data-range="1930,1986" name="1930,1986"></a></div><h3>Paso 1 - Subir el Paquete de Instalación TAC (TPK)</h3>
+
+<div class="erato-range"><a data-range="1986,2154" name="1986,2154"></a></div><p>Un TPK es un paquete de instalación de la TAC. El primer paso de la publicación de una aplicación es subir el TPK de donde se obtienen ciertos datos de la aplicación.</p>
+
+<div class="erato-range"><a data-range="2154,2192" name="2154,2192"></a></div><p><img src="images/new_app-01.png" alt="new_app-01"></p>
+
+<div class="erato-range"><a data-range="2192,2222" name="2192,2222"></a></div><h3>Paso 2 - Confirmar Datos</h3>
+
+<div class="erato-range"><a data-range="2222,2435" name="2222,2435"></a></div><p>El paso 2 permite verificar que los valores del TPK son correctos. En caso afirmativo el desarrollador continuará con la publicación. En caso contrario deberá generar un nuevo TPK y volver a comenzar el proceso.</p>
+
+<div class="erato-range"><a data-range="2435,2473" name="2435,2473"></a></div><p><img src="images/new_app-02.png" alt="new_app-02"></p>
+
+<div class="erato-range"><a data-range="2473,2581" name="2473,2581"></a></div><p>Una vez confirmado el TPK se procede a la carga de la información multimedia que se mostrará en la tienda.</p>
+
+<div class="erato-range"><a data-range="2581,2602" name="2581,2602"></a></div><h3>Paso 3 - Icono</h3>
+
+<div class="erato-range"><a data-range="2602,2700" name="2602,2700"></a></div><p>El ícono se mostrará en la tienda de aplicaciones cuando se ingrese al detalle de la aplicación.</p>
+
+<div class="erato-range"><a data-range="2700,2738" name="2700,2738"></a></div><p><img src="images/new_app-03.png" alt="new_app-03"></p>
+
+<div class="erato-range"><a data-range="2738,2768" name="2738,2768"></a></div><p>Medidas sugeridas del ícono:</p>
+
+<div class="erato-range"><a data-range="2768,2794" name="2768,2794"></a></div><p><img src="images/icon.png" alt="icon"></p>
+
+<div class="erato-range"><a data-range="2794,2820" name="2794,2820"></a></div><h3>Paso 4 - Logo Simple</h3>
+
+<div class="erato-range"><a data-range="2820,3025" name="2820,3025"></a></div><p>En este paso se sube el logo simple que se mostrará en la tienda en las distintas categorías. Los logo son fundamentalmente importante, así como el nombre de la aplicación, para atraer al usuario TAC-TV.</p>
+
+<div class="erato-range"><a data-range="3025,3063" name="3025,3063"></a></div><p><img src="images/new_app-03.png" alt="new_app-04"></p>
+
+<div class="erato-range"><a data-range="3063,3099" name="3063,3099"></a></div><p>Medidas sugeridas del logo simple:</p>
+
+<div class="erato-range"><a data-range="3099,3139" name="3099,3139"></a></div><p><img src="images/tile_simple.png" alt="tile_simple"></p>
+
+<div class="erato-range"><a data-range="3139,3164" name="3139,3164"></a></div><h3>Paso 5 - Logo Doble</h3>
+
+<div class="erato-range"><a data-range="3164,3264" name="3164,3264"></a></div><p>En este paso se pide subir el logo doble que se mostrará en la tienda en las distintas categorías.</p>
+
+<div class="erato-range"><a data-range="3264,3302" name="3264,3302"></a></div><p><img src="images/new_app-03.png" alt="new_app-05"></p>
+
+<div class="erato-range"><a data-range="3302,3337" name="3302,3337"></a></div><p>Medidas sugeridas del logo doble:</p>
+
+<div class="erato-range"><a data-range="3337,3377" name="3337,3377"></a></div><p><img src="images/tile_double.png" alt="tile_double"></p>
+
+<div class="erato-range"><a data-range="3377,3412" name="3377,3412"></a></div><h3>Paso 6 - Capturas de Pantalla</h3>
+
+<div class="erato-range"><a data-range="3412,3573" name="3412,3573"></a></div><p>En este paso se suben las capturas de pantalla relevantes de la aplicación. Es importante una buena selección imágenes que sea representativo de la aplicación.</p>
+
+<div class="erato-range"><a data-range="3573,3611" name="3573,3611"></a></div><p><img src="images/new_app-06.png" alt="new_app-06"></p>
+
+<div class="erato-range"><a data-range="3611,3659" name="3611,3659"></a></div><p>Medidas sugeridas de las capturas de pantalla:</p>
+
+<div class="erato-range"><a data-range="3659,3699" name="3659,3699"></a></div><p><img src="images/screenshots.png" alt="screenshots"></p>
+
+<div class="erato-range"><a data-range="3699,3977" name="3699,3977"></a></div><p>Una vez ingresada toda la información la aplicación queda <strong>pendiente de aprobación</strong>. Es importante entender que las aplicaciones una vez publicadas por el desarrollador pasan por un proceso de aprobación que puede implicar la corrección de ciertos aspectos de la aplicación.</p>
+
+<div class="erato-range"><a data-range="3977,4008" name="3977,4008"></a></div><h2>Desarrollo de Aplicaciones</h2>
+
+<div class="erato-range"><a data-range="4008,4327" name="4008,4327"></a></div><p>Las aplicaciones de la TAC-TV son aplicaciones HTML5 estándar, esto es, no pueden utilizar <em>Flash</em>, <em>Silverlight</em> u otros plugins. El desarrollo se realiza sobre <strong>Chromium 41</strong> o superior y se debe contemplar que la aplicación debe estar diseñada para una resolución de 720p y para interacción con un control remoto.</p>
+
+<div class="erato-range"><a data-range="4327,4461" name="4327,4461"></a></div><p>El mapeo de las teclas sigue el estándar W3C <a href="https://lists.w3.org/Archives/Public/public-web-and-tv/2011May/att-0039/vk-for-tv.html">https://lists.w3.org/Archives/Public/public-web-and-tv/2011May/att-0039/vk-for-tv.html</a>.</p>
+
+<div class="erato-range"><a data-range="4461,4497" name="4461,4497"></a></div><p><img src="images/control.png" alt="control_tac"></p>
+
+<div class="erato-range"><a data-range="4497,4591" name="4497,4591"></a></div><p>Actualmente las herramientas utilizadas por nuestro equipo de desarrollo incluyen el uso de:</p>
+
+<div class="erato-range"><a data-range="4591,4686" name="4591,4686"></a></div><ul>
+<li><a href="http://gruntjs.com">Grunt</a><br></li>
+<li><a href="http://bower.io">Bower</a><br></li>
+<li><a href="https://angularjs.org">AngularJs</a><br></li>
+</ul>
+
+<div class="erato-range"><a data-range="4686,4959" name="4686,4959"></a></div><p>Pero cualquiero otro framework como <a href="https://jquery.com">jQuery</a>, <a href="http://backbonejs.org">Backbone.js</a>, <a href="https://www.polymer-project.org">Polymer</a>, <a href="http://enyojs.com">Enyo</a>, etc. La selección  dependerá de la experiencia previa del equipo de desarrollo y gusto personal.</p>
+
+<div class="erato-range"><a data-range="4959,4982" name="4959,4982"></a></div><h2>Creación de un TPK</h2>
+
+<div class="erato-range"><a data-range="4982,5155" name="4982,5155"></a></div><p>La estructura de un paquete de instalación TAC (TPK) es simple. La misma está compuesta de un archivo <code>manifest.json</code> que contiene la información referida a la aplicación.</p>
+
+<div class="erato-range"><a data-range="5155,5289" name="5155,5289"></a></div><p>El TPK es en última instancia un archivo <code>tar.gz</code> con la siguiente estructura básica para el caso de aplicaciones web tradicionales:</p>
+
+<pre><code class="txt"><div class="erato-range"><a data-range="5289,5333" name="5289,5333"></a></div>+
+|_ manifest.json
+|_ icon.png
+</code></pre>
+
+<div class="erato-range"><a data-range="5333,5433" name="5333,5433"></a></div><p>En el caso que la aplicación este autocontenida tendrá las carpetas y contenido correspondientes.</p>
+
+<div class="erato-range"><a data-range="5433,5467" name="5433,5467"></a></div><h3>Estructura del manifest.json</h3>
+
+<div class="erato-range"><a data-range="5467,5675" name="5467,5675"></a></div><p>La estructura básica del json del manifeste se muestra en el siguiente ejemplo de una aplicación de Trivia. en <a href="resources/schemamanifest.json"><code>schemamanifest.json</code></a> se encuentra la especificación completa.</p>
+
+<div class="erato-range"><a data-range="5675,6527" name="5675,6527"></a></div><pre><code class="json">{
+    &quot;vendor&quot;: &quot;UNQ&quot;,
+    &quot;id&quot;: &quot;ar.edu.unq.utics.tac.triviar&quot;,
+    &quot;components&quot;: [
+        {
+            &quot;type&quot;: &quot;app&quot;,
+            &quot;id&quot;: &quot;ar.edu.unq.utics.tac.triviar&quot;,
+            &quot;name&quot;: &quot;Triviar&quot;,
+            &quot;description&quot;: &quot;Triviar es un juego educativo didáctico de preguntas y respuestas. Triviar te permite jugar con tus amigos en la misma TAC o en línea con otros jugadores. Empezá a jugar y demostrá todo lo que sabes!&quot;,
+            &quot;version&quot;: &quot;0.0.1&quot;,
+            &quot;main&quot;: &quot;http://tiendatac.minplan.gob.ar/triviar&quot;,
+            &quot;icon&quot;: &quot;icon.png&quot;,
+            &quot;categories&quot;: [&quot;Tiempo Libre&quot;, &quot;Juegos&quot;],
+            &quot;dependencies&quot;: [
+                &quot;ar.edu.unlp.info.lifia.tvd.system&quot;
+            ]
+        }
+    ],
+    &quot;vendor-url&quot;: &quot;http://www.unq.edu.ar/&quot;,
+    &quot;version&quot;: &quot;0.0.1&quot;,
+    &quot;platform&quot;: &quot;all&quot;,
+    &quot;api-level&quot;: &quot;1.0&quot;
+}
+
+<div class="erato-range"><a data-range="6527,6532" name="6527,6532"></a></div></code></pre>
+
+<div class="erato-range"><a data-range="6532,6568" name="6532,6568"></a></div><h3>Herramienta de Empaquetamiento</h3>
+
+<div class="erato-range"><a data-range="6568,6712" name="6568,6712"></a></div><p>Se provee la siguiente utilidad para la generación de paquetes para la TAC (TPK) y la metadata para las aplicaciones desarrolladas por la UNQ.</p>
+
+<div class="erato-range"><a data-range="6712,6819" name="6712,6819"></a></div><p>Para la validación del <code>manifest.json</code> se requiere primero la instalación de las siguientes herramientas:</p>
+
+<pre><code class="txt"><div class="erato-range"><a data-range="6819,6865" name="6819,6865"></a></div>$ gem install json_schema
+</code></pre>
+
+<p><strong>Linux</strong></p>
+
+<pre><code class="txt"><div class="erato-range"><a data-range="6865,6899" name="6865,6899"></a></div>$ sudo apt-get install jshon
+</code></pre>
+
+<div class="erato-range"><a data-range="6899,6908" name="6899,6908"></a></div><p><strong>OSX</strong></p>
+
+<pre><code class="txt"><div class="erato-range"><a data-range="6908,6934" name="6908,6934"></a></div>$ brew install jshon
+</code></pre>
+
+<div class="erato-range"><a data-range="6934,7017" name="6934,7017"></a></div><p>En caso de no encontrarse el script procederá sin la validación correspondiente.</p>
+
+<div class="erato-range"><a data-range="7017,7027" name="7017,7027"></a></div><h4>Uso</h4>
+
+<pre><code class="txt"><div class="erato-range"><a data-range="7027,7063" name="7027,7063"></a></div>$ ./packager.sh carpeta nombre
+</code></pre>
+
+<div class="erato-range"><a data-range="7063,7127" name="7063,7127"></a></div><p>El script se obtiene de <a href="resources/packager.sh"><code>packager.sh</code></a></p>
+
+<div class="erato-range"><a data-range="7127,7257" name="7127,7257"></a></div><p>Donde, <code>carpeta</code> es la carpeta raíz donde reside la metadata del paquete (manifest.json) y <code>nombre</code>el nombre del TPK a generar.</p>
+<script>hljs.initHighlightingOnLoad();</script></body></html>

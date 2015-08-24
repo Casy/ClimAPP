@@ -1,0 +1,65 @@
+  <div id="container_alerta" class="alert-off">
+    <div class="col-md-4 col-md-offset-4  alerta-display">
+      <p><img src="img/alerta_icon.png"/>
+        ALERTA METEOROLÓGICO <span class="plus">+</span>
+      </p>
+    </div>
+  </div>
+  <div id="container_clima" class="col-md-12">
+    <div class="row">
+      <div class="col-md-2 padding-t-20">
+        <span id="dia_anterior" tabindex="6">&lt; DIA ANTERIOR</span>
+      </div>
+      <div class="col-md-8 padding-t-30">
+        <div class="row">
+          <div class="col-md-12">
+            <p id="dia_seleccionado">AHORA</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img id="clima_icon" src="img/IMG-CLIMA/sol.png"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="grados_dia">&nbsp;&nbsp;<span id="grados_dia_seleccionado">23</span>&deg;</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="min_max_dia">
+              <span id="tipo_dia_seleccionado">SOLEADO</span>
+              <img src="img/max.png"/>
+              <span id="maxima_dia_seleccionado">30</span>&deg;
+              <img src="img/min.png"/>
+              <span id="minima_dia_seleccionado">17</span>&deg;
+            </p>  
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 padding-t-20" dia="dia_1">
+        <span id="dia_siguiente" tabindex="7">DIA SIGUIENTE &gt;</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 dias-sem">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1 padding-tb-dias dias-margin-left" style="height: 28px"></div>
+          <div id="dia_1" class="col-md-1 dias padding-tb-dias" tabindex="8">LUN</div>
+          <div id="dia_2" class="col-md-1 dias padding-tb-dias" tabindex="9">MAR</div>
+          <div id="dia_3" class="col-md-1 dias padding-tb-dias" tabindex="10">MIE</div>
+          <div id="dia_4" class="col-md-1 dias padding-tb-dias" tabindex="11">JUE</div>
+          <div id="dia_5" class="col-md-1 dias padding-tb-dias" tabindex="12">VIE</div>
+          <div id="dia_6" class="col-md-1 dias padding-tb-dias" tabindex="13">SAB</div>
+          <div id="dia_7" class="col-md-1 dias padding-tb-dias" tabindex="14">DOM</div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <button id="ver_mas" class="btn-block btn-ver-mas" tabindex="15">VER MÁS</button>
+      </div>
+    </div>
+  </div>
