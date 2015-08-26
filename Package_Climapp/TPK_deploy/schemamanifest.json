@@ -1,0 +1,75 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Manifest",
+	"description": "A package manifest",
+	"type": "object",
+	"properties": {
+		"id": { "type": "string" },
+		"description": { "type": "string" },
+		"manifest-version": { "type": "string" },
+		"version": { "type": "string" },
+		"vendor": { "type": "string" },
+		"vendor-url": { "type": "string" },
+		"api-level": { "type": "string" },
+		"platform": { "type": "string" },
+		"system": { "type": "boolean" },
+		"update": { "type": "boolean" },
+		"components": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"oneOf": [
+					{ "$ref": "#/definitions/app" }
+				]
+			},
+			"minItems": 1,
+			"uniqueItems": true
+		}
+	},
+	"definitions": {
+		"service": {
+			"properties": {
+				"id": { "type": "string" },
+				"name": { "type": "string" },
+				"description": { "type": "string" },
+				"type": { "enum": [ "service" ] },
+				"version": { "type": "string" },
+				"main": { "type": "string" },
+				"dependencies": { "type": "array" },
+				"runs": { "enum": [ "onStartup", "onDemand" ] }
+			},
+			"required": [ "id", "name", "type", "main" ],
+			"additionalProperties": false
+		},
+		"app": {
+			"properties": {
+				"id": { "type": "string" },
+				"name": { "type": "string" },
+				"description": { "type": "string" },
+				"vendor": { "type": "string" },
+				"bg_transparent": { "type": "boolean"},
+				"type": { "enum": [ "app" ] },
+				"version":{ "type": "string" },
+				"main": { "type": "string" },
+				"icon": { "type": "string" },
+                "categories": { "type": "array" },
+				"dependencies": { "type": "array" }
+			},
+			"required": [ "id", "name", "type", "main" ],
+			"additionalProperties": false
+		},
+		"binary": {
+			"properties": {
+				"id": { "type": "string" },
+				"name": { "type": "string" },
+				"description": { "type": "string" },
+				"type": { "enum": [ "binary" ] },
+				"version": { "type": "string" }
+			},
+			"required": [ "id", "name", "type" ],
+			"additionalProperties": false
+		}
+	},
+	"required": ["id", "version", "vendor", "api-level", "platform", "components"],
+	"additionalProperties": false
+}
