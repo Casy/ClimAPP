@@ -3,7 +3,8 @@
 window.$ = require('jquery');
 require('jquery-ui');
 window.L = require('leaflet');
-window.OWM = require('./leaflet-openweathermap'); 
+window.OWM = require('./leaflet-openweathermap');
+window.geo = require('../js/geo.js');
 
 var controller = require('./controller');
 
@@ -11,25 +12,31 @@ window.clima_completo;	//Todo el json que devuelve
 window.vars;			//7 dias de la semana
 window.latitud;
 window.longitud;
-window.vista_actual = "";
+window.vista_actual = ""; 
 window.estado_vistas = false;
 
 var diaActual;
 
 
 // SE CARGA EL DOM
-
+ 
 $( document ).ready(function() {
 	console.log( "doc ready!" );
 
-	if (navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(controller.get_clima_iniciar, controller.errores);
+	if (navigator.geolocation){ 
+		navigator.geolocation.getCurrentPosition(controller.get_clima_iniciar, geoLocalizar);
 	}else{
 		console.log('El navegador no soporta geolocalizacion.');
 	}
 
+	function geoLocalizar(){ 
+		if(geo.init()){
+		   geo.getCurrentPosition(controller.get_clima_iniciar, controller.errores);
+		}
+	}
+
 });
-},{"./controller":5,"./leaflet-openweathermap":10,"jquery":17,"jquery-ui":16,"leaflet":18}],2:[function(require,module,exports){
+},{"../js/geo.js":15,"./controller":5,"./leaflet-openweathermap":10,"jquery":18,"jquery-ui":17,"leaflet":19}],2:[function(require,module,exports){
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -665,7 +672,7 @@ function get_dia(hora){
 }
 
 module.exports = graficar;
-},{"chart.js":15}],10:[function(require,module,exports){
+},{"chart.js":16}],10:[function(require,module,exports){
 /**
  * A JavaScript library for using OpenWeatherMap's layers and OWM's city/station data for leaflet based maps without hassle.
  * License: CC0 (Creative Commons Zero), see http://creativecommons.org/publicdomain/zero/1.0/
@@ -1966,6 +1973,261 @@ function velocidad_viento(dia){
 
 module.exports = setearVerMas;
 },{"./direccion_viento.js":7}],15:[function(require,module,exports){
+var bb_success;
+var bb_error;
+var bb_blackberryTimeout_id=-1;
+
+function handleBlackBerryLocationTimeout()
+{
+    if(bb_blackberryTimeout_id!=-1)
+    {
+        bb_error({message:"Timeout error", code:3});
+    }
+}
+function handleBlackBerryLocation()
+{
+        clearTimeout(bb_blackberryTimeout_id);
+        bb_blackberryTimeout_id=-1;
+        if (bb_success && bb_error)
+        {
+                if(blackberry.location.latitude==0 && blackberry.location.longitude==0)
+                {
+                        //http://dev.w3.org/geo/api/spec-source.html#position_unavailable_error
+                        //POSITION_UNAVAILABLE (numeric value 2)
+                        bb_error({message:"Position unavailable", code:2});
+                }
+                else
+                {  
+                        var timestamp=null;
+                        //only available with 4.6 and later
+                        //http://na.blackberry.com/eng/deliverables/8861/blackberry_location_568404_11.jsp
+                        if (blackberry.location.timestamp)
+                        {
+                                timestamp=new Date(blackberry.location.timestamp);
+                        }
+                        bb_success({timestamp:timestamp, coords: {latitude:blackberry.location.latitude,longitude:blackberry.location.longitude}});
+                }
+                //since blackberry.location.removeLocationUpdate();
+                //is not working as described http://na.blackberry.com/eng/deliverables/8861/blackberry_location_removeLocationUpdate_568409_11.jsp
+                //the callback are set to null to indicate that the job is done
+
+                bb_success = null;
+                bb_error = null;
+        }
+}
+
+var geo_position_js=function() {
+
+        var pub = {};
+        var provider=null;
+        var u="undefined";
+
+        pub.showMap = function(latitude,longitude)
+        {
+            if(typeof(blackberry)!=u)
+            {
+                blackberry.launch.newMap({"latitude":latitude*100000,"longitude":-longitude*100000});
+            }
+            else
+            {
+                window.location="http://maps.google.com/maps?q=loc:"+latitude+","+longitude;
+            }
+        }
+
+
+        pub.getCurrentPosition = function(success,error,opts)
+        {
+                provider.getCurrentPosition(success, error,opts);
+        }
+        
+
+        pub.init = function()
+        {           
+                try
+                {
+                        if (typeof(geo_position_js_simulator)!=u)
+                        {
+                                provider=geo_position_js_simulator;
+                        }
+                        else if (typeof(bondi)!=u && typeof(bondi.geolocation)!=u)
+                        {
+                                provider=bondi.geolocation;
+                        }
+                        else if (typeof(navigator.geolocation)!=u)
+                        {
+                                provider=navigator.geolocation;
+                                pub.getCurrentPosition = function(success, error, opts)
+                                {
+                                        function _success(p)
+                                        {
+                                                //for mozilla geode,it returns the coordinates slightly differently
+                                                if(typeof(p.latitude)!=u)
+                                                {
+                                                        success({timestamp:p.timestamp, coords: {latitude:p.latitude,longitude:p.longitude}});
+                                                }
+                                                else
+                                                {
+                                                        success(p);
+                                                }
+                                        }
+                                        provider.getCurrentPosition(_success,error,opts);
+                                }
+                        }
+                        else if(typeof(window.blackberry)!=u && blackberry.location.GPSSupported)
+                        {
+
+                                // set to autonomous mode
+                                if(typeof(blackberry.location.setAidMode)==u)
+                                {
+                                    return false;                                   
+                                }
+                                blackberry.location.setAidMode(2);
+                                //override default method implementation
+                                pub.getCurrentPosition = function(success,error,opts)
+                                {
+                                        //alert(parseFloat(navigator.appVersion));
+                                        //passing over callbacks as parameter didn't work consistently
+                                        //in the onLocationUpdate method, thats why they have to be set
+                                        //outside
+                                        bb_success=success;
+                                        bb_error=error;
+                                        //function needs to be a string according to
+                                        //http://www.tonybunce.com/2008/05/08/Blackberry-Browser-Amp-GPS.aspx
+                                        if(opts['timeout'])  
+                                        {
+                                            bb_blackberryTimeout_id=setTimeout("handleBlackBerryLocationTimeout()",opts['timeout']);
+                                        }
+                                        else
+                                        //default timeout when none is given to prevent a hanging script
+                                        {
+                                            bb_blackberryTimeout_id=setTimeout("handleBlackBerryLocationTimeout()",60000);
+                                        }                                       
+                                        blackberry.location.onLocationUpdate("handleBlackBerryLocation()");
+                                        blackberry.location.refreshLocation();
+                                }
+                                provider=blackberry.location;               
+                        }
+                        else if(typeof(window.google)!="undefined" && typeof(google.gears)!="undefined")
+                        {
+                                provider=google.gears.factory.create('beta.geolocation');
+                                pub.getCurrentPosition = function(successCallback, errorCallback, options)
+                                {
+                                        function _successCallback(p)
+                                        {
+                                                if(typeof(p.latitude)!="undefined")
+                                                {
+                                                        successCallback({timestamp:p.timestamp, coords: {latitude:p.latitude,longitude:p.longitude}});
+                                                }
+                                                else
+                                                {
+                                                        successCallback(p);
+                                                }
+                                        }
+                                        provider.getCurrentPosition(_successCallback,errorCallback,options);
+                                }
+
+                        }
+                        else if ( typeof(Mojo) !=u && typeof(Mojo.Service.Request)!="Mojo.Service.Request")
+                        {
+                                provider=true;
+                                pub.getCurrentPosition = function(success, error, opts)
+                                {
+
+                                parameters={};
+                                if(opts)
+                                {
+                                         //http://developer.palm.com/index.php?option=com_content&view=article&id=1673#GPS-getCurrentPosition
+                                         if (opts.enableHighAccuracy && opts.enableHighAccuracy==true)
+                                         {
+                                                parameters.accuracy=1;
+                                         }
+                                         if (opts.maximumAge)
+                                         {
+                                                parameters.maximumAge=opts.maximumAge;
+                                         }
+                                         if (opts.responseTime)
+                                         {
+                                                if(opts.responseTime<5)
+                                                {
+                                                        parameters.responseTime=1;
+                                                }
+                                                else if (opts.responseTime<20)
+                                                {
+                                                        parameters.responseTime=2;
+                                                }
+                                                else
+                                                {
+                                                        parameters.timeout=3;
+                                                }
+                                         }
+                                }
+
+
+                                 r=new Mojo.Service.Request('palm://com.palm.location', {
+                                        method:"getCurrentPosition",
+                                            parameters:parameters,
+                                            onSuccess: function(p){success({timestamp:p.timestamp, coords: {latitude:p.latitude, longitude:p.longitude,heading:p.heading}});},
+                                            onFailure: function(e){
+                                                                if (e.errorCode==1)
+                                                                {
+                                                                        error({code:3,message:"Timeout"});
+                                                                }
+                                                                else if (e.errorCode==2)
+                                                                {
+                                                                        error({code:2,message:"Position unavailable"});
+                                                                }
+                                                                else
+                                                                {
+                                                                        error({code:0,message:"Unknown Error: webOS-code"+errorCode});
+                                                                }
+                                                        }
+                                            });
+                                }
+
+                        }
+                        else if (typeof(device)!=u && typeof(device.getServiceObject)!=u)
+                        {
+                                provider=device.getServiceObject("Service.Location", "ILocation");
+
+                                //override default method implementation
+                                pub.getCurrentPosition = function(success, error, opts)
+                                {
+                                        function callback(transId, eventCode, result) {
+                                            if (eventCode == 4)
+                                                {
+                                                error({message:"Position unavailable", code:2});
+                                            }
+                                                else
+                                                {
+                                                        //no timestamp of location given?
+                                                        success({timestamp:null, coords: {latitude:result.ReturnValue.Latitude, longitude:result.ReturnValue.Longitude, altitude:result.ReturnValue.Altitude,heading:result.ReturnValue.Heading}});
+                                                }
+                                        }
+                                        //location criteria
+                                    var criteria = new Object();
+                                criteria.LocationInformationClass = "BasicLocationInformation";
+                                        //make the call
+                                        provider.ILocation.GetLocation(criteria,callback);
+                                }
+                        }
+
+                }
+                catch (e){ 
+                    if(typeof(console)!=u)
+                    {
+                        console.log(e);
+                    }
+                    return false;
+                }
+                return  provider!=null;
+        }
+
+
+        return pub;
+}();
+
+module.exports = geo_position_js;
+},{}],16:[function(require,module,exports){
 /*!
  * Chart.js
  * http://chartjs.org/
@@ -5443,7 +5705,7 @@ module.exports = setearVerMas;
 
 
 }).call(this);
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var jQuery = require('jquery');
 
 /*! jQuery UI - v1.10.3 - 2013-05-03
@@ -20450,7 +20712,7 @@ $.widget( "ui.tooltip", {
 
 }( jQuery ) );
 
-},{"jquery":17}],17:[function(require,module,exports){
+},{"jquery":18}],18:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -29662,7 +29924,7 @@ return jQuery;
 
 }));
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*
  Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
  (c) 2010-2013, Vladimir Agafonkin
