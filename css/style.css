@@ -370,3 +370,13 @@ footer{
 .font-90{
 	font-size: 90px;
 }
+
+div.onpointer:hover{
+	background-color: lightsteelblue;
+	cursor: pointer;
+}
+
+i.pointercolor:hover{
+	color:#0076bf;
+	cursor: pointer;
+}
