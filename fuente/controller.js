@@ -89,8 +89,15 @@ controller.hay_tormenta = function(){
 	}
 }
 
-controller.set_background = function(){
-	switch(this.datos.clima_completo.list[0].weather[0].icon){
+controller.set_background = function(icono){
+	var background;
+	if(!!icono){
+		background = icono;
+	}else{
+		background = this.datos.clima_completo.list[0].weather[0].icon
+	}
+	$('#container_clima').removeClass().addClass('row');
+	switch(background){//this.datos.clima_completo.list[0].weather[0].icon){
 		case '01d':
 		$('#container_clima').addClass('back_dia');
 		break;
@@ -237,6 +244,7 @@ controller.controller = function(){
 		if(vista_actual != 'mapa_zona' && estado_vistas != true){
 			vista_actual = 'mapa_zona';
 			estado_vistas = true;
+			controller.set_background();
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/mapa_zona.html', function(){
 					controller.set_background();
@@ -255,6 +263,7 @@ controller.controller = function(){
 		if(vista_actual != 'clima_cercanias' && estado_vistas != true){
 			vista_actual = 'clima_cercanias';
 			estado_vistas = true;
+			controller.set_background();
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/clima_cercanias.html', function(){
 					controller.set_background();
@@ -273,6 +282,7 @@ controller.controller = function(){
 		if(vista_actual != 'ver_mapa' && estado_vistas != true){
 			vista_actual = 'ver_mapa';
 			estado_vistas = true;
+			controller.set_background();
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/ver_mapa.html', function(){
 					controller.set_background();
@@ -292,6 +302,7 @@ controller.controller = function(){
 		if(vista_actual != 'estadisticas' && estado_vistas != true){
 			vista_actual = 'estadisticas';
 			estado_vistas = true;
+			controller.set_background();
 			$("content").effect('fade', 1000, function(){
 				$(this).load('vistas/estadisticas.html', function(){
 					controller.set_background();

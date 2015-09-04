@@ -1,3 +1,4 @@
+var cambiar_fondo = require('./controller.js').set_background;
 
 var cambiarDia = function cambiarDia(contenido,id){
 	var dias = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
@@ -20,6 +21,8 @@ var cambiarDia = function cambiarDia(contenido,id){
 		i++;
 	}
 
+
+	cambiar_fondo(vars[auxiliar].weather[0].icon);
 	$('#clima_icon').effect("fade", 500, function(){
 		$(this).attr('src', 'img/ICONS/'+vars[auxiliar].weather[0].icon+'.png');
 	}).effect("fade", 500);
