@@ -54,40 +54,40 @@
         <div class="col-md-12 footer-options">
           <div class="row">
             <div class="col-md-4">
-              <div id="mapa_zona" class="mapa onpointer">
+              <div id="mapa_zona" class="mapa onpointer" bn="mapa" bn-n="clima_actual" bn-u="first">
                 <img src="img/mapa.jpg" class="center-block img-responsive"/>
-                <div class="back-ver-mapa" tabindex="1">MAPA DE TU ZONA</div>
+                <div class="back-ver-mapa">MAPA DE TU ZONA</div>
               </div>
             </div>
             <div class="col-md-7 col-md-offset-1">
               <div class="back-icons row">
-                <div class="col-md-3 border-r" id="clima_actual">
+                <div class="col-md-3 border-r" id="clima_actual" bn="clima_actual" bn-n="clima_cercanias" bn-p="mapa" bn-u="first">
                   <span class="fa-stack fa-2x">
                     <i class="fa fa-circle-thin fa-stack-2x pointercolor"></i>
                     <i class="fa fa-cloud fa-stack-1x fa-inverse pointercolor"></i>
                   </span>
-                  <div tabindex="2">CLIMA ACTUAL</div>
+                  <div>CLIMA ACTUAL</div>
                 </div>
-                <div class="col-md-3 border-r" id="clima_cercanias">
+                <div class="col-md-3 border-r" id="clima_cercanias" bn="clima_cercanias" bn-n="mapa_2" bn-p="clima_actual" bn-u="first">
                   <span class="fa-stack fa-2x">
                     <i class="fa fa-circle-thin fa-stack-2x pointercolor"></i>
                     <i class="fa fa-umbrella fa-stack-1x fa-inverse pointercolor"></i>
                   </span>
-                  <div tabindex="3">CLIMA EN CERCANIAS</div>
+                  <div>CLIMA EN CERCANIAS</div>
                 </div>
-                <div class="col-md-3 border-r" id="ver_mapa">
+                <div class="col-md-3 border-r" id="ver_mapa" bn="mapa_2" bn-n="estadisticas" bn-p="clima_cercanias" bn-u="first">
                   <span class="fa-stack fa-2x">
                     <i class="fa fa-circle-thin fa-stack-2x pointercolor"></i>
                     <i class="fa fa-map-marker fa-stack-1x fa-inverve pointercolor"></i>
                   </span>
-                  <div tabindex="4">MAPA</div>
+                  <div>MAPA</div>
                 </div>
-                <div class="col-md-3"  id="estadisticas">
+                <div class="col-md-3" id="estadisticas" bn="estadisticas" bn-p="mapa_2" bn-u="first">
                   <span class="fa-stack fa-2x">
                     <i class="fa fa-circle-thin fa-stack-2x pointercolor"></i>
                     <i class="fa fa-pie-chart fa-stack-1x fa-inverse pointercolor"></i>
                   </span>
-                  <div tabindex="5">ESTADISTICAS</div>
+                  <div>ESTADISTICAS</div>
                 </div>
               </div>
             </div>

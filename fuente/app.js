@@ -18,20 +18,19 @@ var diaActual;
 
 
 // SE CARGA EL DOM
- 
+
 $( document ).ready(function() {
-	console.log( "doc ready!" );
 
 	if (navigator.geolocation){ 
 		navigator.geolocation.getCurrentPosition(controller.get_clima_iniciar, geoLocalizar);
 	}else{
-		console.log('El navegador no soporta geolocalizacion.');
+		console.error('El navegador no soporta geolocalizacion.');
 	}
 
 	function geoLocalizar(){ 
 		if(geo.init()){
-		   geo.getCurrentPosition(controller.get_clima_iniciar, controller.errores);
+			geo.getCurrentPosition(controller.get_clima_iniciar, controller.errores);
 		}
-	}
+	}	
 
 });
