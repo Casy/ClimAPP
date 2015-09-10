@@ -252,7 +252,7 @@ header img{
 	margin-top: 20px;
 	margin-right: 10px;
 	margin-left: 10px;
-	height: 380px;
+	height: 400px;
 }
 
 .min_max_ver_mas{
@@ -377,6 +377,20 @@ div.onpointer:hover{
 }
 
 i.pointercolor:hover{
+	color:#0076bf;
+	cursor: pointer;
+}
+
+.active_d{
+	background-color: lightsteelblue;
+	cursor: pointer;
+}
+
+.active_d i{
+	color:#0076bf;
+}
+
+.active_i{
 	color:#0076bf;
 	cursor: pointer;
 }
