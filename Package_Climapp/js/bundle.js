@@ -195,12 +195,19 @@ controller.get_clima_iniciar = function(posicion){
 
 	controller.datos.latitud = posicion.coords.latitude;
 	controller.datos.longitud = posicion.coords.longitude;
-
+	var query = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat='+controller.datos.latitud+'&lon='+controller.datos.longitud+'&lang=es&units=metric&cnt=7&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0';
 	$.ajax({ 
 		type: 'GET', 
-		url: 'http://api.openweathermap.org/data/2.5/forecast/daily?lat='+controller.datos.latitud+'&lon='+controller.datos.longitud+'&lang=es&units=metric&cnt=7&mode=json&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: query,
 		dataType: 'json',
 		success: function (data) {
+			if (data.cod == '404') {
+				var posicion_bsas = {};
+				posicion_bsas.coords = {};
+				posicion_bsas.coords.latitude = -34.6037;
+				posicion_bsas.coords.longitude = -58.381103;
+				controller.get_clima_iniciar(posicion_bsas);
+			};
 			controller.datos.clima_completo = data;
 			vars = data.list;
 			controller.iniciar();

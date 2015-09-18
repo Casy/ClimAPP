@@ -1,396 +1,399 @@
+html{
+    background-color: #CCD9DF;
+}
 
-body{
-	font-family: 'Dosis', sans-serif;
-	color: #FFF;
-	text-align: center;
-	font-size: 20px;
-	background-color: #0076bf;
+body {
+    font-family: 'Dosis', sans-serif;
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+    background-color: #0076bf;
+    overflow: hidden;
 }
 
-header{
-	background-color: #0076bf;
-	height: 92px;
+header {
+    background-color: #0076bf;
+    height: 80px;
 }
 
-content{
-	background-color: rgba(0,0,0,0.5);
-	float: left;
-	width: 100%;
+content {
+    background-color: rgba(0, 0, 0, 0.5);
+    float: left;
+    width: 100%;
 }
 
-header img{
-	padding-top: 28px;
-	text-align: center;
+header img {
+    padding-top: 20px;
+    text-align: center;
 }
 
-#back_clima{
-	margin-top: -1px;
-	padding-top: 20px;
+#back_clima {
+    margin-top: -1px;
+    padding-top: 20px;
 }
 
-.back_dia{
-	background-image: url('../img/BACK/back_dia.jpg');
+.back_dia {
+    background-image: url('../img/BACK/back_dia.jpg');
 }
 
-.back_noche{
-	background-image: url('../img/BACK/back_noche.jpg');
+.back_noche {
+    background-image: url('../img/BACK/back_noche.jpg');
 }
 
-.back_dia_nublado{
-	background-image: url('../img/BACK/back_dia_nublado.jpg');
+.back_dia_nublado {
+    background-image: url('../img/BACK/back_dia_nublado.jpg');
 }
 
-.back_noche_nubaldo{
-	background-image: url('../img/BACK/back_noche_nubaldo.jpg');
+.back_noche_nubaldo {
+    background-image: url('../img/BACK/back_noche_nubaldo.jpg');
 }
 
-.back_dia_poco_nublado{
-	background-image: url('../img/BACK/back_dia_poco_nublado.jpg');
+.back_dia_poco_nublado {
+    background-image: url('../img/BACK/back_dia_poco_nublado.jpg');
 }
 
-.back_noche_poco_nublado{
-	background-image: url('../img/BACK/back_noche_poco_nublado.jpg');
+.back_noche_poco_nublado {
+    background-image: url('../img/BACK/back_noche_poco_nublado.jpg');
 }
 
-.back_dia_lluvioso{
-	background-image: url('../img/BACK/back_dia_lluvioso.jpg');
+.back_dia_lluvioso {
+    background-image: url('../img/BACK/back_dia_lluvioso.jpg');
 }
 
-.back_noche_lluvioso{
-	background-image: url('../img/BACK/back_noche_lluvioso.jpg');
+.back_noche_lluvioso {
+    background-image: url('../img/BACK/back_noche_lluvioso.jpg');
 }
 
-.back_dia_nieve{
-	background-image: url('../img/BACK/back_dia_nieve.jpg');
+.back_dia_nieve {
+    background-image: url('../img/BACK/back_dia_nieve.jpg');
 }
 
-.back_noche_nieve{
-	background-image: url('../img/BACK/back_noche_nieve.jpg');
+.back_noche_nieve {
+    background-image: url('../img/BACK/back_noche_nieve.jpg');
 }
 
-.back_dia_tormenta{
-	background-image: url('../img/BACK/back_dia_tormenta.jpg');
+.back_dia_tormenta {
+    background-image: url('../img/BACK/back_dia_tormenta.jpg');
 }
 
-.back_noche_tormenta{
-	background-image: url('../img/BACK/back_noche_tormenta.jpg');
+.back_noche_tormenta {
+    background-image: url('../img/BACK/back_noche_tormenta.jpg');
 }
 
-.back_dia_neblina{
-	background-image: url('../img/BACK/back_dia_neblina.jpg');
+.back_dia_neblina {
+    background-image: url('../img/BACK/back_dia_neblina.jpg');
 }
 
-.back_noche_neblina{
-	background-image: url('../img/BACK/back_noche_neblina.jpg');
+.back_noche_neblina {
+    background-image: url('../img/BACK/back_noche_neblina.jpg');
 }
 
-#back_mapa{
-	height: 478px;
-	background-image: url('../img/BACK/back_vista_mapa.jpg');
-	margin-top: -1px;
-	padding-top: 30px;
+#back_mapa {
+    height: 478px;
+    background-image: url('../img/BACK/back_vista_mapa.jpg');
+    margin-top: -1px;
+    padding-top: 30px;
 }
 
-#container_alerta{
-	height: 40px;
+#container_alerta {
+    height: 40px;
 }
 
-.alert-on{
-	background-color: #dd5249;
-	display: inherit;
+.alert-on {
+    background-color: #dd5249;
+    display: inherit;
 }
 
-.alert-off{
-	visibility: hidden;
-	display: none;
+.alert-off {
+    visibility: hidden;
+    display: none;
 }
 
-.alert-off .alerta-display{
-	display: none;
+.alert-off .alerta-display {
+    display: none;
 }
 
-.alert-on p{
-	margin: 0px;
+.alert-on p {
+    margin: 0px;
 }
 
-.alert-on img{
-	margin-top: -10px;
-	z-index: 10;
-	position: absolute;
-	left: 50px;	
+.alert-on img {
+    margin-top: -10px;
+    z-index: 10;
+    position: absolute;
+    left: 50px;
 }
 
-.plus{
-	font-size: 30px;
+.plus {
+    font-size: 30px;
 }
 
-#container_clima{
-	background-repeat: no-repeat;
-	background-position: center center;
-	z-index: 1;
-	padding-top: 30px;
+#container_clima {
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 1;
 }
 
-.padding-t-10{
-	padding-top: 10px;
+.padding-t-10 {
+    padding-top: 10px;
 }
 
-.padding-t-20{
-	padding-top: 20px;
+.padding-t-20 {
+    padding-top: 20px;
 }
 
-.padding-t-30{
-	padding-top: 30px;
+.padding-t-30 {
+    padding-top: 30px;
 }
 
-.padding-t-15{
-	padding-top: 15px;
+.padding-t-15 {
+    padding-top: 15px;
 }
 
-.padding-tb-dias{
-	padding-top: 18.5px;
-	padding-bottom: 18.5px;
+.padding-tb-dias {
+    padding-top: 18.5px;
+    padding-bottom: 18.5px;
 }
 
-.padding-b-20{
-	padding-bottom: 20px;
+.padding-b-20 {
+    padding-bottom: 20px;
 }
 
-.margin-t-15{
-	margin-top: 15px;
+.margin-t-15 {
+    margin-top: 15px;
 }
 
-.grados_dia{
-	font-size: 100px;
+.grados_dia {
+    font-size: 100px;
 }
 
-.min_max_dia{
-	font-size: 25px;
+.min_max_dia {
+    font-size: 25px;
 }
 
-.min_max_dia img{
-	margin-top: -5px;
+.min_max_dia img {
+    margin-top: -5px;
 }
 
-.dias-sem{
-	height: 65px;
-	background-color: rgba(0,0,0,0.7);
+.dias-sem {
+    height: 65px;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-.btn-ver-mas{
-	background-color: #0076bf;
-	margin-top: 15px;
-	border: none;
+.btn-ver-mas {
+    background-color: #0076bf;
+    margin-top: 15px;
+    border: none;
 }
 
-.container{
-	width: 100%;
+.container {
+    width: 100%;
 }
 
-.dias-margin-left{
-	margin-left: 12.5%;
+.dias-margin-left {
+    margin-left: 12.5%;
 }
 
-.dias-margin-right{
-	margin-right: 12.5%;
+.dias-margin-right {
+    margin-right: 12.5%;
 }
 
-.dia-selected{
-	background-color: #FFF;
-	color: #388ccb;
+.dia-selected {
+    background-color: #FFF;
+    color: #388ccb;
 }
 
-.space-light-blue{
-	background-color: #528ca0;
-	height: 30px;
+.space-light-blue {
+    background-color: #528ca0;
+    height: 13px;
 }
 
-.footer-options{
-	background-color: #ccd9df;
-	height: 190px;
-	padding-bottom: 15px;
+.footer-options {
+    background-color: #ccd9df;
+    height: 190px;
+    padding-bottom: 15px;
 }
 
-.mapa{
-	height: 150px;
-	border: 2px solid #FFF;
-	background-color: #518ca0;
-	margin-top: 20px;
-	padding-bottom: 20px;
+.mapa {
+    height: 150px;
+    border: 2px solid #FFF;
+    background-color: #518ca0;
+    margin-top: 20px;
+    padding-bottom: 20px;
 }
 
-.back-ver-mapa{
-	padding-top: 6px;
+.back-ver-mapa {
+    padding-top: 6px;
 }
 
-.back-icons{
-	margin-top: 25px;
-	background-color: #a3bfca;
-	padding-top: 16px;
-	padding-bottom: 16px;
+.back-icons {
+    margin-top: 25px;
+    background-color: #a3bfca;
+    padding-top: 18px;
+    padding-bottom: 18px;
 }
 
-.border-r{
-	border-right: 1px solid #FFF;
+.border-r {
+    border-right: 1px solid #FFF;
 }
 
-.back-icons img{
-	padding-bottom: 3px;
+.back-icons img {
+    padding-bottom: 3px;
 }
 
-.dia_titulo{
-	padding-top: 5px;
-	padding-bottom: 5px;
-	background-color: rgba(0,0,0,0.2);
-	font-size: 25px;
-	margin-bottom: 10px;
+.dia_titulo {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
-.container_de_dias{
-	background-color: rgba(0,0,0,0.2);
-	margin-bottom: 20px;
-	margin-top: 20px;
-	margin-right: 10px;
-	margin-left: 10px;
-	height: 400px;
+.container_de_dias {
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    height: 400px;
 }
 
-.min_max_ver_mas{
-	margin-left: 13px;
-	margin-right: 13px;
-	padding-bottom: 5px;
-	border-bottom: 1px solid #FFF;
-	font-size: 18px;
-	text-transform: uppercase;
+.min_max_ver_mas {
+    margin-left: 13px;
+    margin-right: 13px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #FFF;
+    font-size: 18px;
+    text-transform: uppercase;
 }
 
-.no-margin-p p{
-	margin: 0px;
+.no-margin-p p {
+    margin: 0px;
 }
 
-.grados-de-dias{
-	font-size: 100px;
-	line-height: 130px;
+.grados-de-dias {
+    font-size: 100px;
+    line-height: 130px;
 }
 
-#icono_dia_actual{
-	padding-top: 5px;
+#icono_dia_actual {
+    padding-top: 5px;
 }
 
-.mapa-cercania{
-	text-align: center;
+.mapa-cercania {
+    text-align: center;
 }
 
-.mapa-cercania p{
-	text-align: center;
+.mapa-cercania p {
+    text-align: center;
 }
 
-.border-b{
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-	border-bottom: 1px solid rgba(255,255,255,0.5);
+.border-b {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.mapa-cercania .grados-de-dias{
-	line-height: 95px;
+.mapa-cercania .grados-de-dias {
+    line-height: 95px;
 }
 
-h2{
-	margin-bottom: 0px;
+h2 {
+    margin-bottom: 0px;
 }
 
-.text-left{
-	text-align: left;
+.text-left {
+    text-align: left;
 }
 
-.cercania-p p{
-	font-size: 18px;
+.cercania-p p {
+    font-size: 18px;
 }
 
-.img-cercania img{
-	padding-top: 10px;
-	max-width: 60px;
+.img-cercania img {
+    padding-top: 10px;
+    max-width: 60px;
 }
 
-#mapa_container{
-	margin: 30px;
-	min-height: 400px;
-	border: 2px solid #FFF;
-	overflow: hidden;
+#mapa_container {
+    margin: 30px;
+    min-height: 400px;
+    border: 2px solid #FFF;
+    overflow: hidden;
 }
 
-.load-state{
-	width: 100%;
-	height: 100%;
-	min-height: 600px;
-	padding-top: 20%;
+.load-state {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    padding-top: 20%;
 }
 
-.load-state img{
-	padding-bottom: 20px;
+.load-state img {
+    padding-bottom: 20px;
 }
 
-header{
-	display: none;
+header {
+    display: none;
 }
 
-footer{
-	display: none;
+footer {
+    display: none;
 }
 
-#clima_icon{
-	min-width: 80px;
-	min-height: 80px;
-	margin-top: 20px;
+#clima_icon {
+    min-width: 80px;
+    min-height: 80px;
+    margin-top: 20px;
 }
 
-#tipo_dia_seleccionado{
-	text-transform: uppercase;
+#tipo_dia_seleccionado {
+    text-transform: uppercase;
 }
 
-#dia_seleccionado{
-	font-size: 25px;
-	margin-bottom: -10px;
+#dia_seleccionado {
+    font-size: 25px;
+    margin-bottom: -10px;
 }
 
-#dia_anterior{
-	display: none;
+#dia_anterior {
+    display: none;
 }
 
 .leaflet-container img {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-.owm-icondiv{
-	padding: 5px;
-	width: 60px;
+.owm-icondiv {
+    padding: 5px;
+    width: 60px;
 }
 
-.font-90{
-	font-size: 90px;
+.font-90 {
+    font-size: 90px;
 }
 
-div.onpointer:hover{
-	background-color: lightsteelblue;
-	cursor: pointer;
+div.onpointer:hover {
+    background-color: lightsteelblue;
+    cursor: pointer;
 }
 
-i.pointercolor:hover{
-	color:#0076bf;
-	cursor: pointer;
+i.pointercolor:hover {
+    color: #0076bf;
+    cursor: pointer;
 }
 
-.active_d{
-	background-color: lightsteelblue;
-	cursor: pointer;
+.active_d {
+    background-color: lightsteelblue;
+    cursor: pointer;
 }
 
-.active_d i{
-	color:#0076bf;
+.active_d i {
+    color: #0076bf;
 }
 
-.active_i{
-	color:#0076bf;
-	cursor: pointer;
+.active_i {
+    color: #0076bf;
+    cursor: pointer;
 }
