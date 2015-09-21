@@ -317,7 +317,7 @@ h2 {
 
 #mapa_container {
     margin: 30px;
-    min-height: 400px;
+    min-height: 380px;
     border: 2px solid #FFF;
     overflow: hidden;
 }
@@ -371,7 +371,7 @@ footer {
 }
 
 .font-90 {
-    font-size: 90px;
+    font-size: 60px;
 }
 
 div.onpointer:hover {
