@@ -35,7 +35,7 @@ controller.get_clima_iniciar = function(posicion){
 			controller.iniciar();
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert(errorThrown);
+			console.log(errorThrown);
 		}
 	});
 }
@@ -51,7 +51,7 @@ controller.ciudades_cercanas_estadisticas = function(){
 			controller.get_estadisticas();//Se llama a estadisticas aca, porque sino no esta definida la variable.
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert(errorThrown);
+			console.log(errorThrown);
 		}
 	});
 }
@@ -194,7 +194,7 @@ controller.get_estadisticas = function(){
 
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert(errorThrown);
+			console.log(textStatus);
 		}
 	});
 } 
