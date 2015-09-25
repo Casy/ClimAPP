@@ -23,20 +23,6 @@ var diaActual;
 $( document ).ready(function() {
 	var algo = false;
 
-	if (navigator.geolocation){ 
-		navigator.geolocation.getCurrentPosition(controller.get_clima_iniciar, geoLocalizar);
-	}else{
-		console.error('El navegador no soporta geolocalizacion.');
-		api_geo();
-
-	}
-
-	function geoLocalizar(){ 
-		if(geo.init()){
-			geo.getCurrentPosition(controller.get_clima_iniciar, controller.errores);
-		}
-	}
-
 	function api_geo(){
 		$.ajax({ 
 		type: 'GET', 
@@ -44,26 +30,20 @@ $( document ).ready(function() {
 		success: function (data) {
 				console.warn(data);
 				algo = false
-				if(data.status === 'success'){
+				if(true){//data.status === 'success'){
 					var datos = {coords:{
 									latitude:data.lat,
 									longitude:data.lon
 								}};
 					controller.get_clima_iniciar(datos);
-					window.datos= data;
 				}else{
-					$.ajax({
-						type: 'GET',
-						url: 'http://api.wipmania.com/json',
-						success: function(data){
-							var datos = {coords:{
-								latitude:data.latitude,
-								longitude:data.longitude
-							}};
-							controller.get_clima_iniciar(datos);
-							window.datos= data;
-						}
-					});
+					var datos = {coords:{
+									latitude:-34.6037,
+									longitude:-58.381103
+								}
+							};
+					controller.get_clima_iniciar(datos);
+						
 				}
 
 		},
@@ -73,7 +53,8 @@ $( document ).ready(function() {
 			alert(textStatus);
 		}
 	});
-	}	
+	}
+	api_geo();
 
 });
 },{"../js/geo.js":15,"./controller":5,"./leaflet-openweathermap":10,"jquery":18,"jquery-ui":17,"leaflet":19}],2:[function(require,module,exports){
@@ -260,10 +241,11 @@ controller.get_clima_iniciar = function(posicion){
 }
 
 controller.ciudades_cercanas_estadisticas = function(){
-	//http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=3
+	//var query='http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=5';
+	var query = 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=4&mode=json&lang=sp&APPID=c44a164d60b023ea3f628c7677c0d6b0';
 	$.ajax({ 
 		type: 'GET',
-		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=4&mode=json&lang=sp&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: query,
 		dataType: 'json',
 		success: function (data) {
 			controller.datos.ciudades_cercanas = data;
@@ -400,7 +382,7 @@ controller.movimiento = function(){
 }
 
 controller.get_estadisticas = function(){
-	//http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start={start}&cnt=8
+	//var query = 'http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start=1443206237&cnt=8';
 	//var horasAtras = new Date(controller.datos.clima_completo.list[0].dt*1000);
 	var horasAtras = new Date(controller.datos.ciudades_cercanas.list[0].dt*1000);
 	horasAtras = (horasAtras.getTime()/1000) - 18000;
@@ -408,6 +390,9 @@ controller.get_estadisticas = function(){
 		type: 'GET',
 		url: 'http://api.openweathermap.org/data/2.5/history/city?lat='+controller.datos.latitud+'&lon='+controller.datos.longitud+'&type=hour&start='+horasAtras+'&cnt=5&APPID=c44a164d60b023ea3f628c7677c0d6b0',
 		dataType: 'json',
+		xhrFields: {
+      		withCredentials: true
+   		},
 		success: function (data) {
 			controller.datos.estadisticas = data;
 
@@ -2046,18 +2031,18 @@ module.exports = organizarDias;
 },{}],12:[function(require,module,exports){
 var organizarDias = require('./organizarDias.js');
 
-var primerDia = function(diaActual){
-
-			$('#clima_icon').attr('src', 'img/ICONS/'+diaActual.weather[0].icon+'.png');
-			$('#grados_dia_seleccionado' ).html( parseInt(diaActual.temp.day,10) );
-			$('#tipo_dia_seleccionado').html( diaActual.weather[0].description );
-			$('#maxima_dia_seleccionado').html( parseInt(diaActual.temp.max,10) );
-			$('#minima_dia_seleccionado').html( parseInt(diaActual.temp.min,10) );
-			organizarDias(diaActual.dt);
-		}
+var primerDia = function(diaActual) {
+    $('#clima_icon').attr('src', 'img/ICONS/' + diaActual.weather[0].icon + '.png');
+    $('#grados_dia_seleccionado').html(parseInt(diaActual.temp.day, 10));
+    $('#tipo_dia_seleccionado').html(diaActual.weather[0].description);
+    $('#maxima_dia_seleccionado').html(parseInt(diaActual.temp.max, 10));
+    $('#minima_dia_seleccionado').html(parseInt(diaActual.temp.min, 10));
+    organizarDias(diaActual.dt);
+}
 
 
 module.exports = primerDia;
+
 },{"./organizarDias.js":11}],13:[function(require,module,exports){
 
 

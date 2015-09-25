@@ -41,10 +41,11 @@ controller.get_clima_iniciar = function(posicion){
 }
 
 controller.ciudades_cercanas_estadisticas = function(){
-	//http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=3
+	//var query='http://api.openweathermap.org/data/2.5/find?lat=-34.841&lon=-58.3683&cnt=5';
+	var query = 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=4&mode=json&lang=sp&APPID=c44a164d60b023ea3f628c7677c0d6b0';
 	$.ajax({ 
 		type: 'GET',
-		url: 'http://api.openweathermap.org/data/2.5/find?lat='+controller.datos.latitud +'&lon='+controller.datos.longitud+'&units=metric&cnt=4&mode=json&lang=sp&APPID=c44a164d60b023ea3f628c7677c0d6b0',
+		url: query,
 		dataType: 'json',
 		success: function (data) {
 			controller.datos.ciudades_cercanas = data;
@@ -181,7 +182,7 @@ controller.movimiento = function(){
 }
 
 controller.get_estadisticas = function(){
-	//http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start={start}&cnt=8
+	//var query = 'http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start=1443206237&cnt=8';
 	//var horasAtras = new Date(controller.datos.clima_completo.list[0].dt*1000);
 	var horasAtras = new Date(controller.datos.ciudades_cercanas.list[0].dt*1000);
 	horasAtras = (horasAtras.getTime()/1000) - 18000;
@@ -189,6 +190,9 @@ controller.get_estadisticas = function(){
 		type: 'GET',
 		url: 'http://api.openweathermap.org/data/2.5/history/city?lat='+controller.datos.latitud+'&lon='+controller.datos.longitud+'&type=hour&start='+horasAtras+'&cnt=5&APPID=c44a164d60b023ea3f628c7677c0d6b0',
 		dataType: 'json',
+		xhrFields: {
+      		withCredentials: true
+   		},
 		success: function (data) {
 			controller.datos.estadisticas = data;
 
