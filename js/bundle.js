@@ -21,16 +21,13 @@ var diaActual;
 // SE CARGA EL DOM
 
 $( document ).ready(function() {
-	var algo = false;
-
 	function api_geo(){
 		$.ajax({ 
 		type: 'GET', 
 		url: 'http://ip-api.com/json',
 		success: function (data) {
-				console.warn(data);
-				algo = false
-				if(true){//data.status === 'success'){
+				if(data.status === 'success'){
+					console.log("ok!");
 					var datos = {coords:{
 									latitude:data.lat,
 									longitude:data.lon
@@ -47,8 +44,6 @@ $( document ).ready(function() {
 				}
 
 		},
-
-
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(textStatus);
 		}
@@ -231,6 +226,7 @@ controller.get_clima_iniciar = function(posicion){
 				controller.get_clima_iniciar(posicion_bsas);
 			};
 			controller.datos.clima_completo = data;
+			window.datos = data;
 			vars = data.list;
 			controller.iniciar();
 		},  
@@ -249,7 +245,7 @@ controller.ciudades_cercanas_estadisticas = function(){
 		dataType: 'json',
 		success: function (data) {
 			controller.datos.ciudades_cercanas = data;
-			controller.get_estadisticas();//Se llama a estadisticas aca, porque sino no esta definida la variable.
+			//controller.get_estadisticas();//Se llama a estadisticas aca, porque sino no esta definida la variable.
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log(errorThrown);
@@ -698,7 +694,7 @@ var Chart = require('chart.js');
 var graficar = function(datos){
 
 	var data = {
-	    labels: [get_hora(datos.estadisticas.list[0].dt),get_hora(datos.estadisticas.list[1].dt), get_hora(datos.estadisticas.list[2].dt), get_hora(datos.estadisticas.list[3].dt), get_hora(datos.estadisticas.list[4].dt)],
+	    labels: [get_dia(datos.clima_completo.list[0].dt),get_dia(datos.clima_completo.list[1].dt), get_dia(datos.clima_completo.list[2].dt), get_dia(datos.clima_completo.list[3].dt), get_dia(datos.clima_completo.list[4].dt)],	    
 	    datasets: [
 	        {
 	            label: "Temperaturas",
@@ -708,13 +704,13 @@ var graficar = function(datos){
 	            pointStrokeColor: "#fff",
 	            pointHighlightFill: "#fff",
 	            pointHighlightStroke: "rgba(220,220,220,1)",
-	            data: [convertir_temperatura(datos.estadisticas.list[0].main.temp), convertir_temperatura(datos.estadisticas.list[1].main.temp), convertir_temperatura(datos.estadisticas.list[2].main.temp), convertir_temperatura(datos.estadisticas.list[3].main.temp), convertir_temperatura(datos.estadisticas.list[4].main.temp)]
+	            data: [datos.clima_completo.list[0].temp.max, datos.clima_completo.list[1].temp.max, datos.clima_completo.list[2].temp.max, datos.clima_completo.list[3].temp.max, datos.clima_completo.list[4].temp.max]
 	        }
 	    ]
 	};
 
 	var presion = {
-	    labels: [get_hora(datos.estadisticas.list[0].dt),get_hora(datos.estadisticas.list[1].dt), get_hora(datos.estadisticas.list[2].dt), get_hora(datos.estadisticas.list[3].dt), get_hora(datos.estadisticas.list[4].dt)],
+	    labels: [get_dia(datos.clima_completo.list[0].dt),get_dia(datos.clima_completo.list[1].dt), get_dia(datos.clima_completo.list[2].dt), get_dia(datos.clima_completo.list[3].dt), get_dia(datos.clima_completo.list[4].dt)],
 	    datasets: [
 	        {
 	            label: "Temperaturas",
@@ -724,13 +720,13 @@ var graficar = function(datos){
 	            pointStrokeColor: "#fff",
 	            pointHighlightFill: "#fff",
 	            pointHighlightStroke: "rgba(220,220,220,1)",
-	            data: [datos.estadisticas.list[0].main.pressure, datos.estadisticas.list[1].main.pressure, datos.estadisticas.list[2].main.pressure, datos.estadisticas.list[3].main.pressure, datos.estadisticas.list[4].main.pressure]
+	            data: [datos.clima_completo.list[0].pressure, datos.clima_completo.list[1].pressure, datos.clima_completo.list[2].pressure, datos.clima_completo.list[3].pressure, datos.clima_completo.list[4].pressure]
 	        }
 	    ]
 	};
 
 	var humedad = {
-	    labels: [get_hora(datos.estadisticas.list[0].dt),get_hora(datos.estadisticas.list[1].dt), get_hora(datos.estadisticas.list[2].dt), get_hora(datos.estadisticas.list[3].dt), get_hora(datos.estadisticas.list[4].dt)],
+	    labels: [get_dia(datos.clima_completo.list[0].dt),get_dia(datos.clima_completo.list[1].dt), get_dia(datos.clima_completo.list[2].dt), get_dia(datos.clima_completo.list[3].dt), get_dia(datos.clima_completo.list[4].dt)],
 	    datasets: [
 	        {
 	            label: "Temperaturas",
@@ -740,13 +736,13 @@ var graficar = function(datos){
 	            pointStrokeColor: "#fff",
 	            pointHighlightFill: "#fff",
 	            pointHighlightStroke: "rgba(220,220,220,1)",
-	            data: [datos.estadisticas.list[0].main.humidity, datos.estadisticas.list[1].main.humidity, datos.estadisticas.list[2].main.humidity, datos.estadisticas.list[3].main.humidity, datos.estadisticas.list[4].main.humidity]
+	            data: [datos.clima_completo.list[0].temp.min, datos.clima_completo.list[1].temp.min, datos.clima_completo.list[2].temp.min, datos.clima_completo.list[3].temp.min, datos.clima_completo.list[4].temp.min]
 	        }
 	    ]
 	};
 
 	var grados_semanal= {
-	    labels: [get_dia(datos.clima_completo.list[0].dt),get_dia(datos.clima_completo.list[1].dt), get_dia(datos.clima_completo.list[2].dt), get_dia(datos.clima_completo.list[3].dt), get_dia(datos.clima_completo.list[4].dt),get_dia(datos.clima_completo.list[5].dt),get_dia(datos.clima_completo.list[6].dt)],
+	    labels: [get_dia(datos.clima_completo.list[0].dt),get_dia(datos.clima_completo.list[1].dt), get_dia(datos.clima_completo.list[2].dt), get_dia(datos.clima_completo.list[3].dt), get_dia(datos.clima_completo.list[4].dt)],
 	    datasets: [
 	        {
 	            label: "Temperaturas",
@@ -756,7 +752,7 @@ var graficar = function(datos){
 	            pointStrokeColor: "#fff",
 	            pointHighlightFill: "#fff",
 	            pointHighlightStroke: "rgba(220,220,220,1)",
-	            data: [parseInt(datos.clima_completo.list[0].temp.day), parseInt(datos.clima_completo.list[1].temp.day,10), parseInt(datos.clima_completo.list[2].temp.day,10), parseInt(datos.clima_completo.list[3].temp.day,10), parseInt(datos.clima_completo.list[4].temp.day,10),parseInt(datos.clima_completo.list[5].temp.day,10),parseInt(datos.clima_completo.list[6].temp.day,10)]
+	            data: [datos.clima_completo.list[0].speed, datos.clima_completo.list[1].speed, datos.clima_completo.list[2].speed, datos.clima_completo.list[3].speed, datos.clima_completo.list[4].speed]
 	        }
 	    ]
 	};
@@ -792,7 +788,7 @@ function convertir_temperatura(temp){
 
 function get_hora(hora){
 	fecha = new Date(hora*1000);
-	return fecha.getHours();
+	return fecha.getDay();
 }
 
 function get_dia(hora){

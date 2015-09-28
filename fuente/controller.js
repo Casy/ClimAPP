@@ -31,6 +31,7 @@ controller.get_clima_iniciar = function(posicion){
 				controller.get_clima_iniciar(posicion_bsas);
 			};
 			controller.datos.clima_completo = data;
+			window.datos = data;
 			vars = data.list;
 			controller.iniciar();
 		},  
@@ -49,7 +50,7 @@ controller.ciudades_cercanas_estadisticas = function(){
 		dataType: 'json',
 		success: function (data) {
 			controller.datos.ciudades_cercanas = data;
-			controller.get_estadisticas();//Se llama a estadisticas aca, porque sino no esta definida la variable.
+			//controller.get_estadisticas();//Se llama a estadisticas aca, porque sino no esta definida la variable.
 		},  
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log(errorThrown);

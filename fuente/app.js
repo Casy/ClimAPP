@@ -20,16 +20,13 @@ var diaActual;
 // SE CARGA EL DOM
 
 $( document ).ready(function() {
-	var algo = false;
-
 	function api_geo(){
 		$.ajax({ 
 		type: 'GET', 
 		url: 'http://ip-api.com/json',
 		success: function (data) {
-				console.warn(data);
-				algo = false
-				if(true){//data.status === 'success'){
+				if(data.status === 'success'){
+					console.log("ok!");
 					var datos = {coords:{
 									latitude:data.lat,
 									longitude:data.lon
@@ -46,8 +43,6 @@ $( document ).ready(function() {
 				}
 
 		},
-
-
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(textStatus);
 		}
