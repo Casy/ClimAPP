@@ -247,7 +247,7 @@ controller.activar_teclado = function(){
 		}
 	}
 
-	$(document).bind('keypress', function(e){
+	$(document).bind('keydown', function(e){
 		var code = e.keyCode || e.which;
 		switch(code){
 			//enter
