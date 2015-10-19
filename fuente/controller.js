@@ -183,8 +183,6 @@ controller.movimiento = function(){
 }
 
 controller.get_estadisticas = function(){
-	//var query = 'http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start=1443206237&cnt=8';
-	//var horasAtras = new Date(controller.datos.clima_completo.list[0].dt*1000);
 	var horasAtras = new Date(controller.datos.ciudades_cercanas.list[0].dt*1000);
 	horasAtras = (horasAtras.getTime()/1000) - 18000;
 	$.ajax({ 
@@ -247,7 +245,7 @@ controller.activar_teclado = function(){
 		}
 	}
 
-	$(document).bind('keydown', function(e){
+	$(document).keydown(function(e){
 		var code = e.keyCode || e.which;
 		switch(code){
 			//enter

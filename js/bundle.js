@@ -378,8 +378,6 @@ controller.movimiento = function(){
 }
 
 controller.get_estadisticas = function(){
-	//var query = 'http://api.openweathermap.org/data/2.5/history/city?lat=controller.datos.latitud&lon=controller.datos.longitud&type=hour&start=1443206237&cnt=8';
-	//var horasAtras = new Date(controller.datos.clima_completo.list[0].dt*1000);
 	var horasAtras = new Date(controller.datos.ciudades_cercanas.list[0].dt*1000);
 	horasAtras = (horasAtras.getTime()/1000) - 18000;
 	$.ajax({ 
@@ -442,7 +440,7 @@ controller.activar_teclado = function(){
 		}
 	}
 
-	$(document).bind('keydown', function(e){
+	$(document).keydown(function(e){
 		var code = e.keyCode || e.which;
 		switch(code){
 			//enter
@@ -678,7 +676,8 @@ var generarMapa = function mapa(latitud, longitud, zoomMax,zoomMin){
 	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
 	var osm = new L.TileLayer(osmUrl, {minZoom: zoomMin, maxZoom:zoomMax, attribution: osmAttrib});
-	var city = L.OWM.current({intervall: 15, imageLoadingUrl: 'img/owmloading.gif', lang: 'sp', minZoom: zoomMin, maxZoom: zoomMax});
+	var city = L.OWM.current({intervall: 15, imageLoadingUrl: 'img/owmloading.gif', lang: 'sp', minZoom: zoomMin, maxZoom: zoomMax,
+			 appId: 'c44a164d60b023ea3f628c7677c0d6b0'});
 	map = new L.Map('mapa_container');
 	map.setView(new L.LatLng(latitud,longitud),zoomMin);
 	map.addLayer(osm);
